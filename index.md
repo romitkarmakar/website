@@ -324,7 +324,7 @@
           <h5 class="text-uppercase font-weight-bold">
             <a href="#"><i class="fa fa-phone"></i></a>
           </h5>
-          <div class="service-content">9674999069,<br>7980151929,<br>9804894417</div>
+          <div class="service-content">9674999069,<br>7980151929,<br>6290782731</div>
         </div>
     <!-- Grid column -->
 
