@@ -94,7 +94,6 @@
   <p>   And as nothing comes for free these days we wanted to make these services available to clients in an easier and affordable way .<p>
     We wanted to make a cooperative community of both learning and sharing at the same time keeping the business aspect to it alive too .
     <p> We want to provide interested clients with in-demand services like web development , game development, graphic designing and even AR/VR development .
-      <p> Our intention was towards freelancing but the only thing better than one person behind a task is multiple persons .
         <p> We want to make a cooperative team and teach people around us things they want to train in so they can take a step towards their future too.
     </div>
   </section>
