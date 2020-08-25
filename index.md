@@ -264,7 +264,7 @@
 </svg></i></span></a>
                    </div>
                    <div class="service-content">
-                     <h2 class="s-title">AR/VR</h2>
+                     <h2 class="s-title">Augmented Reality</h2>
                    </div>
                    <p class="s-description text-center">
                    Escape reality by learning unity and the world of Extended Reality
