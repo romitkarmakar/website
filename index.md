@@ -251,14 +251,7 @@ We wanted to provide the rest of the world with what we have to offer .
              </div>
            </div>
 
-<div class="container">
-  <div style="width:100%;height:0;padding-bottom:150%;position:relative;">
-    <iframe src="https://giphy.com/embed/xT9IgqjmZ870vakg4E" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen>
-    </iframe>
-  </div>
-</div>
-</div>
-  <p>
+
 
 
   <!-- Footer -->
