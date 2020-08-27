@@ -16,65 +16,26 @@
   <div class="header">
     <div class="header-inner">
       <div class="container-fluid px-lg-5">
-  <nav class=" navbar navbar-dark navbar-expand-md fixed-top  ">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
-                 <span class="navbar-toggler-icon"></span>
-             </button>
-               <!--a class="navbar-brand" href="#"> <img src="logo.png" class="img-fluid" height="30"width="40">
-               </a-->
-               <div class="collapse navbar-collapse" id="Navbar">
-                      <ul class="navbar-nav mr-auto nav nav-pills nav-stacked  " id="accordion" data-spy="affix" data-offset-top="605">
-                        <li class="nav-item active btn"><a class="nav-link" href="#">Home</a></li>
-                        <li class="nav-item  btn"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item  btn" >
-                          <div class="nav-item dropdown">
-                  <a class="nav-link" href="" data-toggle="collapse" data-target="#demo1" data-parent="#accordion">
-                    Services
-                    <i class="fa fa-angle-down"></i>
-                  </a>
+  <nav class="navbar navbar-dark navbar-expand-sm  fixed-top">
 
-                  <ul id="demo1" class="collapse">
-
-                    <div class="dropdown">
-        <li class="btn nav-link self-align-center " >
-        Web development
-        </li>
-        <li class="btn nav-link self-align-center " >
-        AR/VR
-        </li>
-        <li class="btn nav-link self-align-center " >
-        Graphic Designing
-        </li>
-
-              </div>
-              </div>
-              <li class="nav-item  btn" >
-                  <div class="nav-item dropdown">
-              <a class="nav-link" href="" data-toggle="collapse" data-target="#demo2" data-parent="#accordion">
-            Train With us!
-              <i class="fa fa-angle-down"></i>
-              </a>
-
-              <ul id="demo2" class="collapse">
-
-              <div class="dropdown">
-              <li class="btn nav-link self-align-center " >
-              Web development
-              </li>
-              <li class="btn nav-link self-align-center " >
-              AR/VR
-              </li>
-              <li class="btn nav-link self-align-center " >
-              Graphic Designing
-              </li>
-              </div>
-              </div>
-              <li class="nav-item  btn"><a class="nav-link" href="#contact">Contact</a></li>
-            </div>
-          </nav>
-        </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                       <span class="navbar-toggler-icon"></span>
+                   </button>
+                     <a class="navbar-brand" href="#"> <img src="bg.png" class="img-fluid" height="30"width="40">
+                         </a>
+                     <div class="collapse navbar-collapse" id="Navbar">
+                            <ul class="navbar-nav mr-auto">
+                              <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+                              <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                              <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                              <li class="nav-item"><a class="nav-link" href="#training">Train With Us</a></li>
+                              <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                          </ul>
+                    </div>
+        </nav>
       </div>
     </div>
+  </div>
 
 <div  id="particles-js">
   <!--logo-->
@@ -89,12 +50,12 @@
     <div class="section-title">
       <h2>ABOUT US</h2>
     </div>
-    <div class="about-info"><p>WonderataX solutions ,Despite it's technical name it was but a mere idea which we wanted to take forward and turn  into a reality .
-<p>We wanted to provide the rest of the world with what we have to offer .
-  <p>   And as nothing comes for free these days we wanted to make these services available to clients in an easier and affordable way .<p>
+    <div class="about-info col-sm-6">WonderataX solutions ,Despite it's technical name it was but a mere idea which we wanted to take forward and turn  into a reality .
+We wanted to provide the rest of the world with what we have to offer .
+     And as nothing comes for free these days we wanted to make these services available to clients in an easier and affordable way .
     We wanted to make a cooperative community of both learning and sharing at the same time keeping the business aspect to it alive too .
-    <p> We want to provide interested clients with in-demand services like web development , game development, graphic designing and even AR/VR development .
-        <p> We want to make a cooperative team and teach people around us things they want to train in so they can take a step towards their future too.
+     We want to provide interested clients with in-demand services like web development , game development, graphic designing and even AR/VR development .
+         We want to make a cooperative team and teach people around us things they want to train in so they can take a step towards their future too.
     </div>
   </section>
 </div>
@@ -217,7 +178,7 @@
 
            <!--training-->
            <div class="padding">
-           <section id="services"class="services">
+           <section id="training"class="services">
              <div class="section-title">
                <h2>Train With Us!</h2>
              </div>
