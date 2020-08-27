@@ -21,7 +21,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
                        <span class="navbar-toggler-icon"></span>
                    </button>
-                     <a class="navbar-brand" href="#"> <img src="bg.png" class="img-fluid" height="30"width="40">
+                     <a class="navbar-brand" href="#"> <img src="bg.webp" class="img-fluid" height="30"width="40">
                          </a>
                      <div class="collapse navbar-collapse" id="Navbar">
                             <ul class="navbar-nav mr-auto">
@@ -39,7 +39,7 @@
 
 <div  id="particles-js">
   <!--logo-->
-<div id="home" class="intro route bg-image " style="background-image: url(logo.jpg); width:auto;">
+<div id="home" class="intro route bg-image " style="background-image: url(logo.webp); width:auto;">
 </div>
 
 <!--About-->
@@ -130,7 +130,7 @@ We wanted to provide the rest of the world with what we have to offer .
                    </div>
                    <div class="carousel-item"><center>
                      <img class="d-block img-fluid"
-                         src="o1.jpg" style="border-radius:50%;width:190px;"></center>
+                         src="o1.webp" style="border-radius:50%;width:190px;"></center>
                          <div class="service-content text-center">
                            <h2 class="s-title">Swapnil Biswas</h2>
                            CDO,Co-Founder
@@ -138,7 +138,7 @@ We wanted to provide the rest of the world with what we have to offer .
                    </div>
                    <div class="carousel-item"><center>
                      <img class="d-block img-fluid"
-                         src="o3.jpg" style="border-radius:50%;width:188px;"></center>
+                         src="o3.webp" style="border-radius:50%;width:188px;"></center>
                          <div class="service-content text-center">
                            <h2 class="s-title">Maitrish Ghosh</h2>
                            COO,Co-Founder
@@ -146,7 +146,7 @@ We wanted to provide the rest of the world with what we have to offer .
                    </div>
                    <div class="carousel-item"><center>
                      <img class="d-block img-fluid"
-                         src="o4.jpg" style="border-radius:50%;width:203px;"></center>
+                         src="o4.webp" style="border-radius:50%;width:203px;"></center>
                      <div class="service-content text-center">
                        <h2 class="s-title">Rohan Gupta</h2>
                       Lead Graphic Designer
@@ -330,7 +330,7 @@ We wanted to provide the rest of the world with what we have to offer .
               <i class="fa fa-linkedin fa-lg white-text mr-4"> </i>
             </a>
             <!--Instagram-->
-            <a>
+            <a href="https://instagram.com/wonderatax?igshid=19n5xqinhgr6u">
               <i class="fa fa-instagram fa-lg white-text mr-4"> </i>
             </a>
 
