@@ -181,6 +181,7 @@ We wanted to provide the rest of the world with what we have to offer .
            <section id="training"class="services">
              <div class="section-title">
                <h2>Train With Us!</h2>
+                            <h4><a href="Final.jpg"><button type="button" class="btn btn-light">Download</button></a></h4>
              </div>
              <div class="row">
                <div class="col-md-4">
