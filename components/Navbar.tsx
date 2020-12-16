@@ -46,8 +46,13 @@ export default function Navbar() {
                   </a>
                 </li>
                 <li className="nav-item" id="criticalbtn4">
-                  <a className="nav-link" href="#register">
+                  <a className="nav-link" href="/register">
                     Register
+                  </a>
+                </li>
+                <li className="nav-item" id="criticalbtn4">
+                  <a className="nav-link" href="/login">
+                    Login
                   </a>
                 </li>
                 <li className="nav-item">
