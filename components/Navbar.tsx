@@ -45,18 +45,8 @@ export default function Navbar() {
                     Contact
                   </a>
                 </li>
-                <li className="nav-item" id="criticalbtn4">
-                  <a className="nav-link" href="/register">
-                    Register
-                  </a>
-                </li>
-                <li className="nav-item" id="criticalbtn4">
-                  <a className="nav-link" href="/login">
-                    Login
-                  </a>
-                </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="training.html">
+                  <a className="nav-link" href="/training">
                     Train With Us
                   </a>
                 </li>

@@ -61,13 +61,13 @@ export default function Navbar() {
               Courses
             </a>
             <a
-              href="#"
+              href="/register"
               className="font-medium text-gray-500 hover:text-gray-900"
             >
               Register
             </a>
             <a
-              href="#"
+              href="/login"
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
               Log in
@@ -138,7 +138,7 @@ export default function Navbar() {
                   Marketplace
                 </a>
                 <a
-                  href="#"
+                  href="/register"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   role="menuitem"
                 >
@@ -147,7 +147,7 @@ export default function Navbar() {
               </div>
               <div role="none">
                 <a
-                  href="#"
+                  href="/login"
                   className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
                   role="menuitem"
                 >
