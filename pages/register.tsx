@@ -2,18 +2,50 @@ import React from "react";
 import Head from "next/head";
 
 export default function RegisterPage() {
-  const [password, setPassword] = React.useState("");
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+    name: "",
+    phoneNumber: "",
+    referrer: "",
+  });
   const [confirmPassword, setConfirmPassword] = React.useState("");
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/authentication/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.status === "SUCCESS") {
+          alert(response.message);
+          window.location.href = "/";
+        } else if (response.status === "ERROR") {
+          alert(response.message);
+        }
+      });
+  };
   return (
     <>
-    <Head>
+      <Head>
         <title>Create your account</title>
-    </Head>
+      </Head>
       <div className="container bg-black max-w-full mx-auto md:py-24 px-6">
         <div className="max-w-sm mx-auto px-6">
           <div className="relative flex flex-wrap">
             <div className="w-full relative">
               <div className="md:mt-6">
+                <img
+                  className="mx-auto h-12 mb-6 w-auto"
+                  src="/img/bg.png"
+                  alt="Workflow"
+                />
                 <h2 className="text-center text-3xl mb-2 font-bold text-white">
                   Create your account
                 </h2>
@@ -23,15 +55,19 @@ export default function RegisterPage() {
                     Login
                   </a>
                 </div>
-                <form
-                  className="mt-8"
-                  x-data="{password: '',password_confirm: ''}"
-                >
+                <form className="mt-8" onSubmit={onSubmit}>
                   <div className="mx-auto max-w-lg ">
                     <div className="py-1">
                       <span className="px-1 text-sm text-gray-600">Name</span>
                       <input
                         type="text"
+                        value={formData.name}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            name: e.target.value,
+                          })
+                        }
                         className="text-md block px-3 py-2 rounded-lg w-full
           bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                       />
@@ -40,14 +76,30 @@ export default function RegisterPage() {
                       <span className="px-1 text-sm text-gray-600">Email</span>
                       <input
                         type="email"
+                        value={formData.email}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            email: e.target.value,
+                          })
+                        }
                         className="text-md block px-3 py-2 rounded-lg w-full
           bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                       />
                     </div>
                     <div className="py-1">
-                      <span className="px-1 text-sm text-gray-600">Phone Number</span>
+                      <span className="px-1 text-sm text-gray-600">
+                        Phone Number
+                      </span>
                       <input
                         type="tel"
+                        value={formData.phoneNumber}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            phoneNumber: e.target.value,
+                          })
+                        }
                         className="text-md block px-3 py-2 rounded-lg w-full
           bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                       />
@@ -59,8 +111,13 @@ export default function RegisterPage() {
                       <input
                         type="password"
                         x-model="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={formData.password}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            password: e.target.value,
+                          })
+                        }
                         className="text-md block px-3 py-2 rounded-lg w-full
           bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                       />
@@ -84,8 +141,8 @@ export default function RegisterPage() {
                           <div
                             className={
                               "rounded-full p-1 fill-current" +
-                              (password == confirmPassword &&
-                              password.length > 0
+                              (formData.password == confirmPassword &&
+                              formData.password.length > 0
                                 ? "bg-green-200 text-green-700"
                                 : "bg-red-200 text-red-700")
                             }
@@ -96,8 +153,8 @@ export default function RegisterPage() {
                               viewBox="0 0 24 24"
                               stroke="currentColor"
                             >
-                              {password == confirmPassword &&
-                              password.length > 0 ? (
+                              {formData.password == confirmPassword &&
+                              formData.password.length > 0 ? (
                                 <path
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
@@ -116,12 +173,15 @@ export default function RegisterPage() {
                           </div>
                           <span
                             className={
-                              (password == confirmPassword && password.length > 0
+                              formData.password == confirmPassword &&
+                              formData.password.length > 0
                                 ? "text-green-700"
-                                : "text-red-700") + "font-medium text-white text-sm ml-3"
+                                : "text-red-700" +
+                                  "font-medium text-white text-sm ml-3"
                             }
                           >
-                            {password == confirmPassword && password.length > 0
+                            {formData.password == confirmPassword &&
+                            formData.password.length > 0
                               ? "Passwords match"
                               : "Passwords do not match"}
                           </span>
@@ -130,7 +190,7 @@ export default function RegisterPage() {
                           <div
                             className={
                               "rounded-full p-1 fill-current" +
-                              (password.length > 7
+                              (formData.password.length > 7
                                 ? "bg-green-200 text-green-700"
                                 : "bg-red-200 text-red-700")
                             }
@@ -141,7 +201,7 @@ export default function RegisterPage() {
                               viewBox="0 0 24 24"
                               stroke="currentColor"
                             >
-                              {password.length > 7 ? (
+                              {formData.password.length > 7 ? (
                                 <path
                                   x-show="password.length > 7"
                                   strokeLinecap="round"
@@ -162,12 +222,13 @@ export default function RegisterPage() {
                           </div>
                           <span
                             className={
-                              password.length > 7
+                              formData.password.length > 7
                                 ? "text-green-700"
-                                : "text-red-700" + "font-medium text-white text-sm ml-3"
+                                : "text-red-700" +
+                                  "font-medium text-white text-sm ml-3"
                             }
                           >
-                            {password.length > 7
+                            {formData.password.length > 7
                               ? "The minimum length is reached"
                               : "At least 8 characters required"}
                           </span>
@@ -175,13 +236,13 @@ export default function RegisterPage() {
                       </ul>
                     </div>
                     <div className="flex justify-start">
-                      <label className="block text-gray-500 font-bold my-4 flex items-center">
+                      <label className="block text-gray-500 font-bold my-4 items-center">
                         <input
                           className="leading-loose text-pink-600 top-0"
                           type="checkbox"
                         />
                         <span className="ml-2 text-sm py-2 text-gray-600 text-left">
-                          Accept the
+                          Accept the&nbsp;
                           <a
                             href="#"
                             className="font-semibold text-white border-b-2 border-gray-200 hover:border-gray-500"
@@ -200,7 +261,7 @@ export default function RegisterPage() {
                     </button>
                   </div>
                 </form>
-                <div className="text-sm font-semibold block sm:hidden py-6 flex justify-center">
+                <div className="text-sm font-semibold block sm:hidden py-6 justify-center">
                   <a
                     href="#"
                     className="text-black font-normal border-b-2 border-gray-200 hover:border-teal-500"
