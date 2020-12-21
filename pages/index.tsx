@@ -175,7 +175,7 @@ export default function IndexPage() {
             <div className="section-title">
               <h2>ABOUT US</h2>
             </div>
-            <div className="about-info col-md-12">
+            <div className="about-info col-md-10">
               WonderataX Solutions ,Despite it's technical name it was but a
               mere idea which we wanted to take forward and turn into a reality
               . We wanted to provide the rest of the world with what we have to
