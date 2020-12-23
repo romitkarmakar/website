@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function Navbar() {
+interface IProps {
+  options: Array<string>;
+  selectedOption: string;
+  setSelectedOption: (option: string) => void;
+}
+
+export default function Navbar(props: IProps) {
   const [openDropdown, setOpenDropdown] = React.useState(false);
   const [openMenu, setOpenMenu] = React.useState(false);
   const [openNotif, setOpenNotif] = React.useState(false);
@@ -63,30 +69,21 @@ export default function Navbar() {
             </div>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
-                <a
-                  href="#"
-                  className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Dashboard
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Team
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Projects
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Calendar
-                </a>
+                {props.options.map((v) => (
+                  <a
+                    key={v}
+                    href="#"
+                    onClick={() => props.setSelectedOption(v)}
+                    className={
+                      "px-3 py-2 rounded-md text-sm font-medium " +
+                      (props.selectedOption == v
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white")
+                    }
+                  >
+                    {v}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -113,24 +110,10 @@ export default function Navbar() {
                   />
                 </svg>
               </button>
-              {openNotif ? (
-                <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                  <div
-                    className="py-1"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="options-menu"
-                  >
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                      role="menuitem"
-                    >
-                      You have no new notifications
-                    </a>
-                  </div>
-                </div>
-              ) : null}
+              <NotificationDropdown
+                open={openNotif}
+                setOpen={(v) => setOpenNotif(v)}
+              />
             </div>
             <div className="ml-3 relative">
               <div>
@@ -147,36 +130,10 @@ export default function Navbar() {
                   />
                 </button>
               </div>
-              {openDropdown ? (
-                <div
-                  className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="user-menu"
-                >
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                  >
-                    Your Profile
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                  >
-                    Settings
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                  >
-                    Sign out
-                  </a>
-                </div>
-              ) : null}
+              <ProfileDropDown
+                open={openDropdown}
+                setOpen={(v) => setOpenDropdown(v)}
+              />
             </div>
           </div>
         </div>
@@ -184,33 +141,106 @@ export default function Navbar() {
       {openMenu ? (
         <div>
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <a
-              href="#"
-              className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Dashboard
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Team
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Projects
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Calendar
-            </a>
+            {props.options.map((v) => (
+              <a
+                key={v}
+                href="#"
+                onClick={() => props.setSelectedOption(v)}
+                className={
+                  "block px-3 py-2 rounded-md text-base font-medium " +
+                  (props.selectedOption == v
+                    ? "bg-gray-900 text-white"
+                    : "text-gray-300 hover:bg-gray-700 hover:text-white")
+                }
+              >
+                {v}
+              </a>
+            ))}
           </div>
         </div>
       ) : null}
     </nav>
+  );
+}
+
+interface NotificationDropdownProps {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+}
+
+function NotificationDropdown(props: NotificationDropdownProps) {
+  const dropDownRef = React.useRef(null);
+  React.useEffect(() => {
+    if (props.open) document.addEventListener("mousedown", handleClick, false);
+    else document.removeEventListener("mousedown", handleClick, false);
+  }, [props.open]);
+
+  const handleClick = (e) => {
+    if (!dropDownRef.current) return;
+    if (!dropDownRef.current.contains(e.target)) {
+      props.setOpen(false);
+    }
+  };
+
+  if (!props.open) return <></>;
+  return (
+    <div
+      className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+      ref={dropDownRef}
+    >
+      <div
+        className="py-1"
+        role="menu"
+        aria-orientation="vertical"
+        aria-labelledby="options-menu"
+      >
+        <a
+          href="#"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          role="menuitem"
+        >
+          You have no new notifications
+        </a>
+      </div>
+    </div>
+  );
+}
+
+interface ProfileDropDownProps {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+}
+
+function ProfileDropDown(props: ProfileDropDownProps) {
+  const dropDownRef = React.useRef(null);
+  React.useEffect(() => {
+    if (props.open) document.addEventListener("mousedown", handleClick, false);
+    else document.removeEventListener("mousedown", handleClick, false);
+  }, [props.open]);
+
+  const handleClick = (e) => {
+    if (!dropDownRef.current) return;
+    if (!dropDownRef.current.contains(e.target)) {
+      props.setOpen(false);
+    }
+  };
+
+  if (!props.open) return <></>;
+  return (
+    <div
+      className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
+      role="menu"
+      aria-orientation="vertical"
+      aria-labelledby="user-menu"
+      ref={dropDownRef}
+    >
+      <a
+        href="#"
+        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        role="menuitem"
+      >
+        Sign out
+      </a>
+    </div>
   );
 }
