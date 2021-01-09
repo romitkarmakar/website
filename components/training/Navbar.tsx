@@ -55,7 +55,7 @@ export default function Navbar() {
               Home
             </a>
             <a
-              href="#"
+              href="/training"
               className="font-medium text-white hover:text-gray-900"
             >
               Courses

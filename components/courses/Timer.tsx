@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function Timer() {
+export default function Timer(props: any) {
   const [day, setDay] = React.useState(0);
   const [hour, setHour] = React.useState(0);
   const [minute, setMinute] = React.useState(0);
   const [second, setSecond] = React.useState(0);
-  const endDate = new Date("Dec 30, 2020 20:00:00").getTime();
+  const endDate = new Date(props.EnrollmentLastDate).getTime();
   let timer;
 
   React.useEffect(() => {

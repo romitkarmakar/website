@@ -5,6 +5,7 @@ import Pricing from "../../components/courses/Pricing";
 import Copyright from "../../components/Copyright";
 import Testimonials from "../../components/courses/Testimonials";
 import Team from "../../components/courses/Team";
+import { GetServerSideProps } from 'next'
 
 const syllabusList = [
   {
@@ -24,12 +25,12 @@ const syllabusList = [
   },
 ];
 
-export default function CoursePage() {
+export default function CoursePage(props: any) {
   return (
     <>
       <div className="bg-black">
         <Navbar />
-        <Hero />
+        <Hero {...props} />
         <div className="flex flex-col items-center">
           <h1 className="text-white text-4xl">What you will learn</h1>
           <div className="flex mt-6 justify-center">
@@ -63,7 +64,7 @@ export default function CoursePage() {
             <div className="flex flex-wrap -m-4 text-center justify-center">
               <div className="p-4 sm:w-1/3 w-1/2">
                 <h2 className="title-font font-medium sm:text-4xl text-3xl text-white">
-                  5 months
+                  {props.EstimatedMonths} months
                 </h2>
                 <p className="leading-relaxed">Estimated Time</p>
               </div>
@@ -82,7 +83,7 @@ export default function CoursePage() {
             </div>
           </div>
         </section>
-        <Pricing />
+        <Pricing {...props} />
         <Team />
         <Testimonials />
         <section className="text-gray-700 body-font">
@@ -92,7 +93,7 @@ export default function CoursePage() {
                 Start Learning Today
               </h2>
               <h1 className="md:text-3xl text-2xl font-medium title-font text-white">
-                Enroll at Web Development
+                Enroll at {props.Name}
               </h1>
             </div>
             <div className="flex md:ml-auto md:mr-0 mx-auto items-center flex-shrink-0">
@@ -101,11 +102,11 @@ export default function CoursePage() {
                   Enroll Now
                 </span>
               </button>
-              <button className="bg-gray-200 inline-flex py-3 px-5 rounded-lg items-center ml-4 hover:bg-gray-300 focus:outline-none">
+              <a href={"https://api.wonderatax.com" + props.SyllabusLink.url} target="_blank" className="bg-gray-200 inline-flex py-3 px-5 rounded-lg items-center ml-4 hover:bg-gray-300 focus:outline-none">
                 <span className="title-font font-medium">
                   Download Syllabus
                 </span>
-              </button>
+              </a>
             </div>
           </div>
         </section>
@@ -113,4 +114,13 @@ export default function CoursePage() {
       </div>
     </>
   );
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    let res = await fetch(`https://api.wonderatax.com/courses/${context.params.id}`)
+    let response = await res.json();
+    
+    return {
+        props: response, 
+    }
 }
