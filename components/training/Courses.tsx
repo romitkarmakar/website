@@ -1,63 +1,5 @@
 import React from "react";
 
-// const coursesList = [
-//   {
-//     title: "Frontend Web Development",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-//   {
-//     title: "Backend Web Development",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-//   {
-//     title: "Full stack web development",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-//   {
-//     title: "Augmented Reality using Unity",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-//   {
-//     title: "Augmented Reality using SparkAR",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-//   {
-//     title: "Networking",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-//   {
-//     title: "Embedded and IoT",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-//   {
-//     title: "3D modelling",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-//   {
-//     title: "Machine Learning",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-//   {
-//     title: "Artificial Intelligence",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-//   {
-//     title: "Game development with Unity",
-//     description:
-//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-//   },
-// ];
-
 export default function Courses() {
   const [coursesList, setCoursesList] = React.useState([]);
 
@@ -87,13 +29,13 @@ export default function Courses() {
                 <a href={"/course/" + v._id} className="">
                   <div className="border border-gray-300 p-6 rounded-lg">
                     <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                      <svg
+                      {v.Icon ? <img className="rounded-full" src={"https://api.wonderatax.com" + v.Icon.url} /> : <svg
                         className=" fill-current h-6 w-6"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 384 512"
                       >
                         <path d="M0 32l34.9 395.8L191.5 480l157.6-52.2L384 32H0zm308.2 127.9H124.4l4.1 49.4h175.6l-13.6 148.4-97.9 27v.3h-1.1l-98.7-27.3-6-75.8h47.7L138 320l53.5 14.5 53.7-14.5 6-62.2H84.3L71.5 112.2h241.1l-4.4 47.7z" />
-                      </svg>
+                      </svg>}
                     </div>
                     <h2 className="text-lg  font-medium title-font mb-2">
                       {v.Name}
