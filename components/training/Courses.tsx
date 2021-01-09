@@ -1,64 +1,73 @@
 import React from "react";
 
-const coursesList = [
-  {
-    title: "Frontend Web Development",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-  {
-    title: "Backend Web Development",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-  {
-    title: "Full stack web development",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-  {
-    title: "Augmented Reality using Unity",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-  {
-    title: "Augmented Reality using SparkAR",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-  {
-    title: "Networking",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-  {
-    title: "Embedded and IoT",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-  {
-    title: "3D modelling",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-  {
-    title: "Machine Learning",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-  {
-    title: "Artificial Intelligence",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-  {
-    title: "Game development with Unity",
-    description:
-      "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
-  },
-];
+// const coursesList = [
+//   {
+//     title: "Frontend Web Development",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+//   {
+//     title: "Backend Web Development",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+//   {
+//     title: "Full stack web development",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+//   {
+//     title: "Augmented Reality using Unity",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+//   {
+//     title: "Augmented Reality using SparkAR",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+//   {
+//     title: "Networking",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+//   {
+//     title: "Embedded and IoT",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+//   {
+//     title: "3D modelling",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+//   {
+//     title: "Machine Learning",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+//   {
+//     title: "Artificial Intelligence",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+//   {
+//     title: "Game development with Unity",
+//     description:
+//       "Enseigner c'est apprendre deux fois. J'aime partager mesconnaissances et mes découvertses.",
+//   },
+// ];
 
 export default function Courses() {
+  const [coursesList, setCoursesList] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://api.wonderatax.com/courses")
+      .then((res) => res.json())
+      .then((response) => {
+        setCoursesList(response);
+      });
+  }, []);
   return (
     <div>
       <section className=" text-gray-200 bg-black">
@@ -74,8 +83,8 @@ export default function Courses() {
           </div>
           <div className="flex flex-wrap -m-4">
             {coursesList.map((v) => (
-                <div className="xl:w-1/3 md:w-1/2 p-4 cursor-pointer">
-                  <a href="/course/webdevelopment" className="">
+              <div className="xl:w-1/3 md:w-1/2 p-4 cursor-pointer">
+                <a href={"/course/" + v._id} className="">
                   <div className="border border-gray-300 p-6 rounded-lg">
                     <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
                       <svg
@@ -87,9 +96,9 @@ export default function Courses() {
                       </svg>
                     </div>
                     <h2 className="text-lg  font-medium title-font mb-2">
-                      {v.title}
+                      {v.Name}
                     </h2>
-                    <p className="leading-relaxed text-base">{v.description}</p>
+                    <p className="leading-relaxed text-base">{v.ShortDescription}</p>
                     <div className="text-center mt-2 leading-none flex justify-between w-full">
                       <span className=" mr-3 inline-flex items-center leading-none text-sm  py-1 ">
                         <svg
@@ -99,7 +108,7 @@ export default function Courses() {
                         >
                           <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z" />
                         </svg>
-                        40 min
+                        {v.EstimatedMonths} month
                       </span>
                       <span className=" inline-flex items-center leading-none text-sm">
                         <svg
@@ -122,8 +131,8 @@ export default function Courses() {
                       </span>
                     </div>
                   </div>
-                  </a>
-                </div>
+                </a>
+              </div>
             ))}
           </div>
         </div>

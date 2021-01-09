@@ -69,16 +69,14 @@ export default function Courses() {
                                 </div>
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
+                                <div className="text-sm text-gray-900 mb-2">
                                   40% Completed
                                 </div>
-                                <div className="shadow w-full bg-grey-light">
+                                <div className="shadow w-full bg-gray-300">
                                   <div
-                                    className="bg-blue text-xs leading-none py-1 text-center text-white"
+                                    className="bg-blue-500 text-xs leading-none py-1 text-center text-white"
                                     style={{ width: "45%" }}
-                                  >
-                                    45%
-                                  </div>
+                                  ></div>
                                 </div>
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
@@ -91,7 +89,94 @@ export default function Courses() {
                                   href="#"
                                   className="text-indigo-600 hover:text-indigo-900"
                                 >
-                                  Start Learning
+                                  Resume Learning
+                                </a>
+                              </td>
+                            </tr>
+                            {/*  */}
+                            <tr>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="flex items-center">
+                                  <div className="flex-shrink-0 h-10 w-10">
+                                    <img
+                                      className="h-10 w-10 rounded-full"
+                                      src="https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582747_1280.png"
+                                    />
+                                  </div>
+                                  <div className="ml-4">
+                                    <div className="text-sm font-medium text-gray-900">
+                                      CSS Design Course
+                                    </div>
+                                    <div className="text-sm text-gray-500">
+                                      Learn the basics of CSS.
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap"></td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                  Not Enrolled
+                                </span>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a
+                                  href="#"
+                                  className="text-indigo-600 hover:text-indigo-900"
+                                >
+                                  Pay Now
+                                </a>
+                              </td>
+                            </tr>
+                            {/*  */}
+                            <tr>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="flex items-center">
+                                  <div className="flex-shrink-0 h-10 w-10">
+                                    <img
+                                      className="h-10 w-10 rounded-full"
+                                      src="https://cdn.auth0.com/blog/react-js/react.png"
+                                    />
+                                  </div>
+                                  <div className="ml-4">
+                                    <div className="text-sm font-medium text-gray-900">
+                                      React Advanced Course
+                                    </div>
+                                    <div className="text-sm text-gray-500">
+                                      Learn the basics of PHP.
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-sm text-gray-900">
+                                  <span className="w-5 h-5 inline-flex mr-2 items-center justify-center bg-green-400 text-white rounded-full flex-shrink-0">
+                                    <svg
+                                      fill="none"
+                                      stroke="#fff"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={3}
+                                      className="w-3 h-3"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path d="M20 6L9 17l-5-5" />
+                                    </svg>
+                                  </span>
+                                  Completed
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                  Enrolled
+                                </span>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a
+                                  href="#"
+                                  className="text-indigo-600 hover:text-indigo-900"
+                                >
+                                  View Certificate
                                 </a>
                               </td>
                             </tr>
@@ -104,11 +189,6 @@ export default function Courses() {
               </div>
             </div>
           </form>
-        </div>
-      </div>
-      <div className="hidden sm:block" aria-hidden="true">
-        <div className="py-5">
-          <div className="border-t border-gray-200" />
         </div>
       </div>
     </>

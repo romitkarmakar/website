@@ -34,7 +34,7 @@ function Correct() {
   );
 }
 
-export default function Pricing() {
+export default function Pricing(props: any) {
   return (
     <section className="text-gray-700 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto flex flex-wrap">
@@ -76,7 +76,7 @@ export default function Pricing() {
               <h2 className="text-5xl text-white font-medium leading-none mb-4 mt-2">
                 Free
               </h2>
-              <span className="text-sm text-white">Next 3 months</span>
+              {/* <span className="text-sm text-white">Next 3 months</span> */}
             </div>
             <p className="bg-gray-900 text-white h-12 text-center px-2 flex items-center -mt-px justify-center border-t border-gray-300">
               Schlitz single-origin
@@ -130,12 +130,12 @@ export default function Pricing() {
               POPULAR
             </span>
             <div className="px-2 text-center h-48 flex flex-col items-center justify-center">
-              <h3 className="tracking-widest">PRO</h3>
+              <h3 className="tracking-widest">MONTHLY</h3>
               <h2 className="text-5xl text-white font-medium flex items-center justify-center leading-none mb-4 mt-2">
-                Rs.3800 
+                Rs.{props.Price} 
                 <span className="text-white text-base ml-1">/mo</span>
               </h2>
-              <span className="text-sm text-white">Charging Rs.456 per year</span>
+              {/* <span className="text-sm text-white">Charging Rs.456 per year</span> */}
             </div>
             <p className="bg-gray-900 text-white h-12 text-center px-2 flex items-center -mt-px justify-center border-t border-gray-300">
               Schlitz single-origin
@@ -186,12 +186,12 @@ export default function Pricing() {
           </div>
           <div className="lg:w-1/3 w-full lg:mt-px border-2 border-gray-300 lg:border-none rounded-lg lg:rounded-none">
             <div className="px-2 text-center h-48 flex flex-col items-center justify-center">
-              <h3 className="tracking-widest">BUSINESS</h3>
+              <h3 className="tracking-widest">YEARLY</h3>
               <h2 className="text-5xl text-white font-medium flex items-center justify-center leading-none mb-4 mt-2">
-                Rs.5400
+                Rs.{props.Price * props.EstimatedMonths}
                 <span className="text-white text-base ml-1">/mo</span>
               </h2>
-              <span className="text-sm text-white">Charging $648 per year</span>
+              {/* <span className="text-sm text-white">Charging $648 per year</span> */}
             </div>
             <p className="bg-gray-900 text-white h-12 text-center px-2 flex items-center -mt-px justify-center border-t border-gray-300">
               Schlitz single-origin
