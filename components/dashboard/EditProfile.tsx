@@ -1,31 +1,9 @@
 import React from "react";
-import Referrals from "./Referrals";
 
 export default function EditProfile() {
   return (
     <div>
       <div>
-        <div className="md:grid md:grid-cols-3 md:gap-6 mb-12">
-          <div className="md:col-span-1">
-            <div className="px-4 sm:px-0">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Referrals
-              </h3>
-              <p className="mt-1 text-sm text-gray-600">
-                Peoples who have signed up using your referral ID.
-              </p>
-            </div>
-          </div>
-          <div className="mt-5 md:mt-0 md:col-span-2">
-            <form action="#" method="POST">
-              <div className="shadow sm:rounded-md sm:overflow-hidden">
-                <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                  <Referrals />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
@@ -42,6 +20,24 @@ export default function EditProfile() {
             <form action="#" method="POST">
               <div className="shadow sm:rounded-md sm:overflow-hidden">
                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
+                <div className="grid grid-cols-3 gap-6">
+                    <div className="col-span-3 sm:col-span-2">
+                      <label
+                        htmlFor="company_website"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Name
+                      </label>
+                      <div className="mt-1 flex rounded-md shadow-sm">
+                        <input
+                          type="text"
+                          name="company_website"
+                          id="company_website"
+                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300"
+                        />
+                      </div>
+                    </div>
+                  </div>
                   <div className="grid grid-cols-3 gap-6">
                     <div className="col-span-3 sm:col-span-2">
                       <label
