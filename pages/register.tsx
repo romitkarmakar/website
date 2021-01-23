@@ -5,16 +5,14 @@ export default function RegisterPage() {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
-    name: "",
-    phoneNumber: "",
-    referrer: "",
+    username: "",
   });
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/authentication/register", {
+    fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,12 +21,9 @@ export default function RegisterPage() {
     })
       .then((res) => res.json())
       .then((response) => {
-        if (response.status === "SUCCESS") {
-          alert(response.message);
-          window.location.href = "/";
-        } else if (response.status === "ERROR") {
-          alert(response.message);
-        }
+        console.log("Well done!");
+        console.log("User profile", response);
+        window.location.href = "/login"
       });
   };
   return (
@@ -61,11 +56,11 @@ export default function RegisterPage() {
                       <span className="px-1 text-sm text-gray-600">Name</span>
                       <input
                         type="text"
-                        value={formData.name}
+                        value={formData.username}
                         onChange={(e) =>
                           setFormData({
                             ...formData,
-                            name: e.target.value,
+                            username: e.target.value,
                           })
                         }
                         className="text-md block px-3 py-2 rounded-lg w-full
@@ -87,23 +82,7 @@ export default function RegisterPage() {
           bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                       />
                     </div>
-                    <div className="py-1">
-                      <span className="px-1 text-sm text-gray-600">
-                        Phone Number
-                      </span>
-                      <input
-                        type="tel"
-                        value={formData.phoneNumber}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            phoneNumber: e.target.value,
-                          })
-                        }
-                        className="text-md block px-3 py-2 rounded-lg w-full
-          bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
-                      />
-                    </div>
+
                     <div className="py-1">
                       <span className="px-1 text-sm text-gray-600">
                         Password
