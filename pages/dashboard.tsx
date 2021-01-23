@@ -11,6 +11,18 @@ const optionsList = ["Courses", "Profile", "Referrals", "Billing"];
 export default function Dashboard() {
   const [selectedOption, setSelectedOption] = React.useState(optionsList[0]);
 
+  React.useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/payments", {
+      headers: {
+        Authorization: "Bearer " + localStorage.jwt,
+      },
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response);
+      });
+  }, []);
+
   return (
     <>
       <Head>

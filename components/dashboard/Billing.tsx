@@ -1,6 +1,35 @@
 import React from "react";
 
 export default function Billing() {
+  const [payments, setPayments] = React.useState([]);
+
+  React.useEffect(() => {
+    loadPayments();
+  }, []);
+
+  const loadPayments = async () => {
+    let userData = JSON.parse(localStorage.user);
+    let temp = [];
+
+    for (let i = 0; i < userData.payments.length; i++) {
+      for (let j = 0; j < userData.payments[i].courses.length; j++) {
+        let res = await fetch(
+          process.env.NEXT_PUBLIC_API_ENDPOINT +
+            "/courses/" +
+            userData.payments[i].courses[j]
+        );
+
+        temp.push({
+          ...userData.payments[i],
+          course: await res.json(),
+        });
+      }
+    }
+
+    console.log(temp);
+    setPayments(temp);
+  };
+
   return (
     <div className="md:grid md:grid-cols-3 md:gap-6">
       <div className="md:col-span-1">
@@ -48,41 +77,43 @@ export default function Billing() {
                           </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                          <tr>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="flex items-center">
-                                <div className="flex-shrink-0 h-10 w-10">
-                                  <img
-                                    className="h-10 w-10 rounded-full"
-                                    src="https://cdn.iconscout.com/icon/free/png-512/php-27-226042.png"
-                                  />
-                                </div>
-                                <div className="ml-4">
-                                  <div className="text-sm font-medium text-gray-900">
-                                    PHP Beginner Course
+                          {payments.map((v) => (
+                            <tr>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="flex items-center">
+                                  <div className="flex-shrink-0 h-10 w-10">
+                                    <img
+                                      className="h-10 w-10 rounded-full"
+                                      src={("https://api.wonderatax.com" + v.course.Icon.url) || "https://cdn.iconscout.com/icon/free/png-512/php-27-226042.png"}
+                                    />
+                                  </div>
+                                  <div className="ml-4">
+                                    <div className="text-sm font-medium text-gray-900">
+                                      {v.course.Name}
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-900">
-                                Rs. 3,800
-                              </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                Paid
-                              </span>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                              <a
-                                href="#"
-                                className="text-indigo-600 hover:text-indigo-900"
-                              >
-                                View Invoice
-                              </a>
-                            </td>
-                          </tr>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-sm text-gray-900">
+                                  Rs. {v.Amount}
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                  {v.Status}
+                                </span>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a
+                                  href="#"
+                                  className="text-indigo-600 hover:text-indigo-900"
+                                >
+                                  View Invoice
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
                           {/*  */}
                           <tr>
                             <td className="px-6 py-4 whitespace-nowrap">
