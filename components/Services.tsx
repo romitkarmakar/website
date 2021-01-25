@@ -117,8 +117,8 @@ const servicesList = [
     ),
   },
   {
-    title: "Networking",
-    description: "Learn HTML, CSS, JS and other web technologies from us.",
+    title: "Internet of Things",
+    description: "We'll help you Connect",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
