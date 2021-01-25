@@ -1,7 +1,17 @@
 import React from "react";
+import { getProfile } from "../../lib/authentication";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [isLogged, setLogged] = React.useState(false);
+
+  React.useEffect(() => {
+    getProfile()
+      .then(() => {
+        setLogged(true);
+      })
+      .catch(() => setLogged(false));
+  }, []);
 
   return (
     <>
@@ -14,10 +24,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between w-full md:w-auto">
               <a href="#">
                 <span className="sr-only">Workflow</span>
-                <img
-                  className="h-8 w-auto sm:h-10"
-                  src="/img/bg.webp"
-                />
+                <img className="h-8 w-auto sm:h-10" src="/img/bg.webp" />
               </a>
               <div className="-mr-2 flex items-center md:hidden">
                 <button
@@ -48,10 +55,7 @@ export default function Navbar() {
             </div>
           </div>
           <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-            <a
-              href="/"
-              className="font-medium text-white hover:text-gray-900"
-            >
+            <a href="/" className="font-medium text-white hover:text-gray-900">
               Home
             </a>
             <a
@@ -60,18 +64,29 @@ export default function Navbar() {
             >
               Courses
             </a>
-            <a
-              href="/register"
-              className="font-medium text-white hover:text-gray-900"
-            >
-              Register
-            </a>
-            <a
-              href="/login"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              Log in
-            </a>
+            {!isLogged ? (
+              <>
+                <a
+                  href="/register"
+                  className="font-medium text-white hover:text-gray-900"
+                >
+                  Register
+                </a>
+                <a
+                  href="/login"
+                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                  Log in
+                </a>
+              </>
+            ) : (
+              <a
+                href="/dashboard"
+                className="font-medium text-white hover:text-gray-900"
+              >
+                Dashboard
+              </a>
+            )}
           </div>
         </nav>
       </div>

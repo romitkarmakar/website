@@ -1,6 +1,18 @@
 import React from "react";
+import { getProfile } from "../../lib/authentication";
+import AlertBox from "../AlertBox";
 
 export default function Courses() {
+  const [enrolledCourses, setEnrolledCourses] = React.useState([]);
+  const [error, setError] = React.useState("");
+
+  React.useEffect(() => {
+    getProfile()
+      .then((profile) => {
+        setEnrolledCourses(profile.EnrolledCourses);
+      })
+      .catch((err) => setError(err.message));
+  }, []);
   return (
     <>
       <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -49,50 +61,52 @@ export default function Courses() {
                             </tr>
                           </thead>
                           <tbody className="bg-white divide-y divide-gray-200">
-                            <tr>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="flex items-center">
-                                  <div className="flex-shrink-0 h-10 w-10">
-                                    <img
-                                      className="h-10 w-10 rounded-full"
-                                      src="https://cdn.iconscout.com/icon/free/png-512/php-27-226042.png"
-                                    />
-                                  </div>
-                                  <div className="ml-4">
-                                    <div className="text-sm font-medium text-gray-900">
-                                      PHP Beginner Course
+                            {enrolledCourses.map((v) => (
+                              <tr>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                  <div className="flex items-center">
+                                    <div className="flex-shrink-0 h-10 w-10">
+                                      <img
+                                        className="h-10 w-10 rounded-full"
+                                        src="https://cdn.iconscout.com/icon/free/png-512/php-27-226042.png"
+                                      />
                                     </div>
-                                    <div className="text-sm text-gray-500">
-                                      Learn the basics of PHP.
+                                    <div className="ml-4">
+                                      <div className="text-sm font-medium text-gray-900">
+                                        {v.course.Name}
+                                      </div>
+                                      <div className="text-sm text-gray-500">
+                                        {v.course.ShortDescription}
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900 mb-2">
-                                  40% Completed
-                                </div>
-                                <div className="shadow w-full bg-gray-300">
-                                  <div
-                                    className="bg-blue-500 text-xs leading-none py-1 text-center text-white"
-                                    style={{ width: "45%" }}
-                                  ></div>
-                                </div>
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Enrolled
-                                </span>
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a
-                                  href="#"
-                                  className="text-indigo-600 hover:text-indigo-900"
-                                >
-                                  Resume Learning
-                                </a>
-                              </td>
-                            </tr>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                  <div className="text-sm text-gray-900 mb-2">
+                                    {v.Progress}% Completed
+                                  </div>
+                                  <div className="shadow w-full bg-gray-300">
+                                    <div
+                                      className="bg-blue-500 text-xs leading-none py-1 text-center text-white"
+                                      style={{ width: "45%" }}
+                                    ></div>
+                                  </div>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Enrolled
+                                  </span>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                  <a
+                                    href="#"
+                                    className="text-indigo-600 hover:text-indigo-900"
+                                  >
+                                    Resume Learning
+                                  </a>
+                                </td>
+                              </tr>
+                            ))}
                             {/*  */}
                             <tr>
                               <td className="px-6 py-4 whitespace-nowrap">
@@ -191,6 +205,7 @@ export default function Courses() {
           </form>
         </div>
       </div>
+      <AlertBox message={error} setMessage={setError} />
     </>
   );
 }

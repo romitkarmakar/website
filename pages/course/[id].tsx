@@ -7,6 +7,7 @@ import Testimonials from "../../components/courses/Testimonials";
 import Team from "../../components/courses/Team";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { getProfile } from "../../lib/authentication";
 
 const syllabusList = [
   {
@@ -28,40 +29,45 @@ const syllabusList = [
 
 export default function CoursePage(props: any) {
   const startPayment = () => {
-    // @ts-ignore
-    let rzp1 = new window.Razorpay({
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
-      amount: props.Price * 1000,
-      currency: "INR",
-      name: props.Name,
-      description: props.Description,
-      image: "https://source.unsplash.com/720x500/?coding",
-      order_id: "order_GT3J0Sy4vzP3F0",
-      handler: function (response) {
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature);
-      },
-      prefill: {
-        name: JSON.parse(localStorage.user).username,
-        email: JSON.parse(localStorage.user).email,
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    });
+    getProfile()
+      .then((profile) => {
+        // @ts-ignore
+        let rzp1 = new window.Razorpay({
+          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
+          amount: props.Price * 1000,
+          currency: "INR",
+          name: props.Name,
+          description: props.Description,
+          image: "https://source.unsplash.com/720x500/?coding",
+          order_id: "order_GT3J0Sy4vzP3F0",
+          handler: function (response) {
+            alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature);
+          },
+          prefill: {
+            name: profile.username,
+            email: profile.email,
+            contact: profile.PhoneNumber,
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        });
 
-    rzp1.on("payment.failed", function (response) {
-      alert(response.error.code);
-      alert(response.error.description);
-      alert(response.error.source);
-      alert(response.error.step);
-      alert(response.error.reason);
-      alert(response.error.metadata.order_id);
-      alert(response.error.metadata.payment_id);
-    });
+        rzp1.on("payment.failed", function (response) {
+          alert(response.error.code);
+          alert(response.error.description);
+          alert(response.error.source);
+          alert(response.error.step);
+          alert(response.error.reason);
+          alert(response.error.metadata.order_id);
+          alert(response.error.metadata.payment_id);
+        });
 
-    rzp1.open();
+        rzp1.open();
+      })
+      .catch(() => (window.location.href = "/login"));
   };
 
   return (
@@ -81,7 +87,10 @@ export default function CoursePage(props: any) {
         <section className="text-gray-700 body-font">
           <div className="container px-5 py-24 mx-auto flex flex-wrap">
             {syllabusList.map((v, index) => (
-              <div className="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
+              <div
+                className="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto"
+                key={index}
+              >
                 <div className="h-full w-8 absolute inset-0 flex items-center justify-center">
                   <div className="h-full w-1 bg-gray-200 pointer-events-none" />
                 </div>

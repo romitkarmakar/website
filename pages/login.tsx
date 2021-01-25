@@ -1,9 +1,11 @@
 import React from "react";
 import Head from "next/head";
+import AlertBox from "../components/AlertBox";
 
 export default function LoginPage() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
 
   const onSubmit = () => {
     fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/auth/local", {
@@ -16,12 +18,21 @@ export default function LoginPage() {
         password: password,
       }),
     })
-      .then((res) => res.json())
-      .then((response) => {
-        console.log(response);
-        localStorage.jwt = response.jwt;
-        localStorage.user = JSON.stringify(response.user);
-      });
+      .then((res) => {
+        if (res.status == 400) {
+          res.json().then((response) => {
+            setError(response.message[0].messages[0].message);
+          });
+        } else if (res.status == 200) {
+          res.json().then((response) => {
+            console.log(response);
+            localStorage.jwt = response.jwt;
+            localStorage.user = JSON.stringify(response.user);
+            window.location.href = "/dashboard";
+          });
+        }
+      })
+      .catch((err) => setError(err.message));
   };
 
   return (
@@ -43,7 +54,7 @@ export default function LoginPage() {
             <p className="mt-2 text-center text-sm text-gray-600">
               Don't have an account?&nbsp;
               <a
-                href="#"
+                href="/register"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
                 Create your account
@@ -134,6 +145,7 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
+      <AlertBox message={error} setMessage={(d) => setError(d)} />
     </>
   );
 }
