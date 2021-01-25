@@ -1,16 +1,21 @@
 import React from "react";
 import Head from "next/head";
+import AlertBox from "../components/AlertBox";
 
 export default function RegisterPage() {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
     username: "",
+    PhoneNumber: "",
   });
   const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/users", {
       method: "POST",
@@ -19,11 +24,20 @@ export default function RegisterPage() {
       },
       body: JSON.stringify(formData),
     })
-      .then((res) => res.json())
-      .then((response) => {
-        console.log("Well done!");
-        console.log("User profile", response);
-        window.location.href = "/login"
+      .then(async (res) => {
+        if (res.status == 200) {
+          window.location.href = "/login";
+        } else if (res.status == 400) {
+          setError((await res.json()).message[0].messages[0].message);
+          setLoading(false);
+        } else {
+          setError(await res.text());
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
       });
   };
   return (
@@ -46,7 +60,7 @@ export default function RegisterPage() {
                 </h2>
                 <div className="text-center text-sm font-base text-white    ">
                   Already have an account?{" "}
-                  <a href="#" className="text-blue-500">
+                  <a href="/login" className="text-blue-500">
                     Login
                   </a>
                 </div>
@@ -82,7 +96,23 @@ export default function RegisterPage() {
           bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                       />
                     </div>
-
+                    <div className="py-1">
+                      <span className="px-1 text-sm text-gray-600">
+                        Phone Number
+                      </span>
+                      <input
+                        type="tel"
+                        value={formData.PhoneNumber}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            PhoneNumber: e.target.value,
+                          })
+                        }
+                        className="text-md block px-3 py-2 rounded-lg w-full
+          bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                      />
+                    </div>
                     <div className="py-1">
                       <span className="px-1 text-sm text-gray-600">
                         Password
@@ -235,8 +265,32 @@ export default function RegisterPage() {
                       className="mt-3 text-lg font-semibold
       bg-gray-800 w-full text-white rounded-lg
       px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+                      disabled={loading}
                     >
-                      Register
+                      {loading ? (
+                        <svg
+                          className="animate-spin mx-auto h-5 w-5 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx={12}
+                            cy={12}
+                            r={10}
+                            stroke="currentColor"
+                            strokeWidth={4}
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          />
+                        </svg>
+                      ) : (
+                        "Register"
+                      )}
                     </button>
                   </div>
                 </form>
@@ -254,6 +308,7 @@ export default function RegisterPage() {
           </div>
         </div>
       </div>
+      <AlertBox message={error} setMessage={setError} />
     </>
   );
 }
