@@ -5,7 +5,8 @@ import Pricing from "../../components/courses/Pricing";
 import Copyright from "../../components/Copyright";
 import Testimonials from "../../components/courses/Testimonials";
 import Team from "../../components/courses/Team";
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 const syllabusList = [
   {
@@ -26,8 +27,48 @@ const syllabusList = [
 ];
 
 export default function CoursePage(props: any) {
+  const startPayment = () => {
+    // @ts-ignore
+    let rzp1 = new window.Razorpay({
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
+      amount: props.Price * 1000,
+      currency: "INR",
+      name: props.Name,
+      description: props.Description,
+      image: "https://source.unsplash.com/720x500/?coding",
+      order_id: "order_GT3J0Sy4vzP3F0",
+      handler: function (response) {
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature);
+      },
+      prefill: {
+        name: JSON.parse(localStorage.user).username,
+        email: JSON.parse(localStorage.user).email,
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    });
+
+    rzp1.on("payment.failed", function (response) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
+
+    rzp1.open();
+  };
+
   return (
     <>
+      <Head>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      </Head>
       <div className="bg-black">
         <Navbar />
         <Hero {...props} />
@@ -97,12 +138,19 @@ export default function CoursePage(props: any) {
               </h1>
             </div>
             <div className="flex md:ml-auto md:mr-0 mx-auto items-center flex-shrink-0">
-              <button className="bg-indigo-500 inline-flex py-3 px-5 rounded-lg items-center hover:bg-indigo-300 focus:outline-none">
+              <button
+                className="bg-indigo-500 inline-flex py-3 px-5 rounded-lg items-center hover:bg-indigo-300 focus:outline-none"
+                onClick={() => startPayment()}
+              >
                 <span className="title-font font-medium text-white">
                   Enroll Now
                 </span>
               </button>
-              <a href={"https://api.wonderatax.com" + props.SyllabusLink.url} target="_blank" className="bg-gray-200 inline-flex py-3 px-5 rounded-lg items-center ml-4 hover:bg-gray-300 focus:outline-none">
+              <a
+                href={"https://api.wonderatax.com" + props.SyllabusLink.url}
+                target="_blank"
+                className="bg-gray-200 inline-flex py-3 px-5 rounded-lg items-center ml-4 hover:bg-gray-300 focus:outline-none"
+              >
                 <span className="title-font font-medium">
                   Download Syllabus
                 </span>
@@ -117,10 +165,12 @@ export default function CoursePage(props: any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    let res = await fetch(`https://api.wonderatax.com/courses/${context.params.id}`)
-    let response = await res.json();
-    
-    return {
-        props: response, 
-    }
-}
+  let res = await fetch(
+    `https://api.wonderatax.com/courses/${context.params.id}`
+  );
+  let response = await res.json();
+
+  return {
+    props: response,
+  };
+};
