@@ -70,13 +70,13 @@ export default function Pricing(props: any) {
           </div>
         </div>
         <div className="flex lg:w-3/4 w-full flex-wrap lg:border border-gray-300 rounded-lg">
-          <div className="lg:w-1/3 lg:mt-px w-full mb-10 lg:mb-0 border-2 border-gray-300 lg:border-none rounded-lg lg:rounded-none">
+          {/*<div className="lg:w-1/3 lg:mt-px w-full mb-10 lg:mb-0 border-2 border-gray-300 lg:border-none rounded-lg lg:rounded-none">
             <div className="px-2 text-center h-48 flex flex-col items-center justify-center">
               <h3 className="tracking-widest">START</h3>
               <h2 className="text-5xl text-white font-medium leading-none mb-4 mt-2">
                 Free
               </h2>
-              {/* <span className="text-sm text-white">Next 3 months</span> */}
+               <span className="text-sm text-white">Next 3 months</span> 
             </div>
             <p className="bg-gray-900 text-white h-12 text-center px-2 flex items-center -mt-px justify-center border-t border-gray-300">
               Schlitz single-origin
@@ -124,13 +124,14 @@ export default function Pricing(props: any) {
                 Literally you probably haven't heard of them jean shorts.
               </p>
             </div>
-          </div>
+          </div>*/}
+          
           <div className="lg:w-1/3 lg:-mt-px w-full mb-10 lg:mb-0 border-2 rounded-lg border-indigo-500 relative">
             <span className="bg-indigo-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">
               POPULAR
             </span>
             <div className="px-2 text-center h-48 flex flex-col items-center justify-center">
-              <h3 className="tracking-widest">MONTHLY</h3>
+              <h3 className="tracking-widest">1 MONTH</h3>
               <h2 className="text-5xl text-white font-medium flex items-center justify-center leading-none mb-4 mt-2">
                 Rs.{props.Price} 
                 <span className="text-white text-base ml-1">/mo</span>
@@ -184,14 +185,14 @@ export default function Pricing(props: any) {
               </p>
             </div>
           </div>
-          <div className="lg:w-1/3 w-full lg:mt-px border-2 border-gray-300 lg:border-none rounded-lg lg:rounded-none">
+          {/*<div className="lg:w-1/3 w-full lg:mt-px border-2 border-gray-300 lg:border-none rounded-lg lg:rounded-none">
             <div className="px-2 text-center h-48 flex flex-col items-center justify-center">
               <h3 className="tracking-widest">YEARLY</h3>
               <h2 className="text-5xl text-white font-medium flex items-center justify-center leading-none mb-4 mt-2">
                 Rs.{props.Price * props.EstimatedMonths}
                 <span className="text-white text-base ml-1">/mo</span>
               </h2>
-              {/* <span className="text-sm text-white">Charging $648 per year</span> */}
+               <span className="text-sm text-white">Charging $648 per year</span> 
             </div>
             <p className="bg-gray-900 text-white h-12 text-center px-2 flex items-center -mt-px justify-center border-t border-gray-300">
               Schlitz single-origin
@@ -238,7 +239,7 @@ export default function Pricing(props: any) {
               <p className="text-xs text-gray-500 mt-3">
                 Literally you probably haven't heard of them jean shorts.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
