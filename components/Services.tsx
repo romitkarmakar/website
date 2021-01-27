@@ -3,7 +3,7 @@ import React from "react";
 const servicesList = [
   {
     title: "Web Development",
-    description: "Learn HTML, CSS, JS and other web technologies from us.",
+    description: "Let us handle your MERN stack journey.",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ const servicesList = [
   },
   {
     title: "Graphic Design",
-    description: "Learn HTML, CSS, JS and other web technologies from us.",
+    description: "Let the creativity flow",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@ const servicesList = [
   },
   {
     title: "AR/ VR Applications",
-    description: "Learn HTML, CSS, JS and other web technologies from us.",
+    description: "Let's escape reality for a while",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ const servicesList = [
   },
   {
     title: "Application Development",
-    description: "Learn HTML, CSS, JS and other web technologies from us.",
+    description: "Creating an easier way",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@ const servicesList = [
   },
   {
     title: "Game Development",
-    description: "Learn HTML, CSS, JS and other web technologies from us.",
+    description: "Step up your Game ",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
