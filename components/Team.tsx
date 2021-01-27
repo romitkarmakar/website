@@ -5,19 +5,19 @@ const teamList = [
     name: "Rahul Talukdar",
     image: "/img/o2.jpg",
     role: "CEO, Founder",
-    description: "Hardworking, Passionate and Learning Enthusiast" 
+    description: "Hardworking,passionate and Dexterity for code " 
   },
   {
     name: "Swapnil Biswas",
     image: "/img/o1.webp",
     role: "CDO, Co-Founder",
-    description: "Hardworking, Passionate and Learning Enthusiast" 
+    description: "Creative, Passionate and a Thirst for knowledge " 
   },
   {
     name: "Maitrish Ghosh",
     image: "/img/o3.webp",
     role: "COO, Co-Founder",
-    description: "Hardworking, Passionate and Learning Enthusiast" 
+    description: "Hardworking,Learning Enthusiast,Precognition" 
   },
 ];
 
