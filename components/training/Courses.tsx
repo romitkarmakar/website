@@ -19,8 +19,7 @@ export default function Courses() {
               OUR COURSES
             </h1>
             <p className="lg:w-1/2 w-full leading-relaxed text-base">
-              Enseigner c'est apprendre deux fois. J'aime partager mes
-              connaissances et mes découvertses.
+            Now you can learn some of the most in-demand techtstacks in an easier and fun way. 
             </p>
           </div>
           <div className="flex justify-center flex-wrap -m-4">

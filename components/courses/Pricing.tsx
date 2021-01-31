@@ -75,7 +75,6 @@ export default function Pricing(props: any) {
             <p className="bg-gray-900 text-white text-center h-12 flex items-center justify-center">
               <Correct />
             </p>
-            
             <div className="p-6 text-center border-t border-gray-300">
               <button className="flex items-center mt-auto text-white bg-indigo-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-600 rounded">
                 Enroll Now
@@ -94,7 +93,7 @@ export default function Pricing(props: any) {
               <p className="text-xs text-gray-500 mt-3">
                 Literally you probably haven't heard of them jean shorts.
               </p>
-            </div>
+            </div> */}
           </div>
         
         </div>

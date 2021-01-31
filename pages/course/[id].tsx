@@ -11,19 +11,19 @@ import { getProfile } from "../../lib/authentication";
 
 const syllabusList = [
   {
-    title: "Data Modeling",
+    title: "Front-End",
     description:
-      "Learn to create relational and NoSQL data models to fit the diverse needs of data consumers. Use ETL to build databases in PostgreSQL and Apache Cassandra.",
+      "Learn the basics of HTML/CSS/JS and the React.js Framework",
   },
   {
-    title: "Cloud Data Warehouses",
+    title: "Back-end",
     description:
-      "Sharpen your data warehousing skills and deepen your understanding of data infrastructure. Create cloud-based data warehouses on Amazon Web Services (AWS).",
+      "Take your Journey forward by learning Node.js and Express",
   },
   {
-    title: "Spark and Data Lakes",
+    title: "Database and Hosting",
     description:
-      "Sharpen your data warehousing skills and deepen your understanding of data infrastructure. Create cloud-based data warehouses on Amazon Web Services (AWS).",
+      "Ever heard of NoSQL?We'll help you learn MongoDB and also host your first website",
   },
 ];
 
@@ -126,7 +126,7 @@ export default function CoursePage(props: any) {
               </div>
               <div className="p-4 sm:w-1/3 w-1/2">
                 <h2 className="title-font font-medium sm:text-4xl text-3xl text-white">
-                  Intermediate SQL
+                  HTML,Js basics
                 </h2>
                 <p className="leading-relaxed">Prerequisites</p>
               </div> */}
