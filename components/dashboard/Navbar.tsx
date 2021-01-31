@@ -13,8 +13,8 @@ export default function Navbar(props: IProps) {
   const [userData, setUserData] = React.useState(null);
 
   React.useEffect(() => {
-    setUserData(JSON.parse(localStorage.user))
-  }, [])
+    setUserData(JSON.parse(localStorage.user));
+  }, []);
 
   return (
     <nav className="bg-gray-800">
@@ -131,7 +131,9 @@ export default function Navbar(props: IProps) {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="h-8 w-8 rounded-full"
-                    src={"https://ui-avatars.com/api/?name=" + userData?.username}
+                    src={
+                      "https://ui-avatars.com/api/?name=" + userData?.username
+                    }
                   />
                 </button>
               </div>
@@ -218,6 +220,7 @@ interface ProfileDropDownProps {
 
 function ProfileDropDown(props: ProfileDropDownProps) {
   const dropDownRef = React.useRef(null);
+
   React.useEffect(() => {
     if (props.open) document.addEventListener("mousedown", handleClick, false);
     else document.removeEventListener("mousedown", handleClick, false);
@@ -230,6 +233,11 @@ function ProfileDropDown(props: ProfileDropDownProps) {
     }
   };
 
+  const signOut = () => {
+    localStorage.removeItem("jwt");
+    window.location.href = "/training";
+  };
+
   if (!props.open) return <></>;
   return (
     <div
@@ -239,13 +247,12 @@ function ProfileDropDown(props: ProfileDropDownProps) {
       aria-labelledby="user-menu"
       ref={dropDownRef}
     >
-      <a
-        href="#"
-        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-        role="menuitem"
+      <button
+        onClick={signOut}
+        className="block px-4 py-2 text-sm w-full text-gray-700 hover:bg-gray-100"
       >
         Sign out
-      </a>
+      </button>
     </div>
   );
 }

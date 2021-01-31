@@ -22,7 +22,7 @@ export default function Navbar() {
         >
           <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
             <div className="flex items-center justify-between w-full md:w-auto">
-              <a href="#">
+              <a href="/">
                 <span className="sr-only">Workflow</span>
                 <img className="h-8 w-auto sm:h-10" src="/img/bg.webp" />
               </a>
@@ -132,25 +132,11 @@ export default function Navbar() {
             >
               <div className="px-2 pt-2 pb-3 space-y-1" role="none">
                 <a
-                  href="#"
+                  href="/"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   role="menuitem"
                 >
                   Home
-                </a>
-                <a
-                  href="#"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-                  role="menuitem"
-                >
-                  Features
-                </a>
-                <a
-                  href="#"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-                  role="menuitem"
-                >
-                  Marketplace
                 </a>
                 <a
                   href="/register"

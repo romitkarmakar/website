@@ -118,7 +118,7 @@ export default function CoursePage(props: any) {
                 </h2>
                 <p className="leading-relaxed">Estimated Time</p>
               </div>
-              <div className="p-4 sm:w-1/3 w-1/2">
+              {/* <div className="p-4 sm:w-1/3 w-1/2">
                 <h2 className="title-font font-medium sm:text-4xl text-3xl text-white">
                   3600
                 </h2>
@@ -129,7 +129,7 @@ export default function CoursePage(props: any) {
                   HTML,Js basics
                 </h2>
                 <p className="leading-relaxed">Prerequisites</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

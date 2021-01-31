@@ -35,7 +35,7 @@ export default function Team() {
         </div>
         <div className="flex flex-wrap -m-4 justify-center">
           {teamList.map((v) => (
-            <div className="p-6 lg:w-1/4 md:w-1/2">
+            <div className="p-6 lg:w-1/4 md:w-1/2" key={v.name}>
               <div className="h-full flex flex-col items-center text-center">
                 <img
                   alt="team"
