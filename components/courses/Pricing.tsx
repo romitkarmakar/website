@@ -91,9 +91,9 @@ export default function Pricing(props: any) {
                 </svg>
               </button>
               <p className="text-xs text-gray-500 mt-3">
-                Literally you probably haven't heard of them jean shorts.
+                Literally you will never regret it.
               </p>
-            </div> */}
+            </div>
           </div>
         
         </div>
