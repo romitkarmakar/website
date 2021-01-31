@@ -177,9 +177,13 @@ interface NotificationDropdownProps {
 
 function NotificationDropdown(props: NotificationDropdownProps) {
   const dropDownRef = React.useRef(null);
+  const [notifications, setNotifications] = React.useState([]);
+
   React.useEffect(() => {
-    if (props.open) document.addEventListener("mousedown", handleClick, false);
-    else document.removeEventListener("mousedown", handleClick, false);
+    if (props.open) {
+      document.addEventListener("mousedown", handleClick, false);
+      loadNotifications();
+    } else document.removeEventListener("mousedown", handleClick, false);
   }, [props.open]);
 
   const handleClick = (e) => {
@@ -187,6 +191,12 @@ function NotificationDropdown(props: NotificationDropdownProps) {
     if (!dropDownRef.current.contains(e.target)) {
       props.setOpen(false);
     }
+  };
+
+  const loadNotifications = () => {
+    fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/notifications")
+      .then((res) => res.json())
+      .then((response) => setNotifications(response));
   };
 
   if (!props.open) return <></>;
@@ -201,13 +211,36 @@ function NotificationDropdown(props: NotificationDropdownProps) {
         aria-orientation="vertical"
         aria-labelledby="options-menu"
       >
-        <a
-          href="#"
-          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-          role="menuitem"
-        >
-          You have no new notifications
-        </a>
+        {notifications.length == 0 ? (
+          <a
+            href="#"
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            role="menuitem"
+          >
+            You have no new notifications
+          </a>
+        ) : (
+          notifications.map((v) => (
+            <a
+              href="#"
+              className="block px-4 py-2 text-gray-700"
+              role="menuitem"
+            >
+              <p className="text-md text-gray-900">{v.Title}</p>
+              <p className="text-xs text-gray-500">
+                {v.Description.slice(0, 50)}
+                {v.Description.length > 50 ? (
+                  <>
+                    ...
+                    <a href="" className="text-blue-500">
+                      Read More
+                    </a>
+                  </>
+                ) : null}
+              </p>
+            </a>
+          ))
+        )}
       </div>
     </div>
   );
