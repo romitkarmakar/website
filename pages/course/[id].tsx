@@ -9,23 +9,23 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { getProfile } from "../../lib/authentication";
 
-const syllabusList = [
-  {
-    title: "Front-End",
-    description:
-      "Learn the basics of HTML/CSS/JS and the React.js Framework",
-  },
-  {
-    title: "Back-end",
-    description:
-      "Take your Journey forward by learning Node.js and Express",
-  },
-  {
-    title: "Database and Hosting",
-    description:
-      "Ever heard of NoSQL?We'll help you learn MongoDB and also host your first website",
-  },
-];
+// const syllabusList = [
+//   {
+//     title: "Front-End",
+//     description:
+//       "Learn the basics of HTML/CSS/JS and the React.js Framework",
+//   },
+//   {
+//     title: "Back-end",
+//     description:
+//       "Take your Journey forward by learning Node.js and Express",
+//   },
+//   {
+//     title: "Database and Hosting",
+//     description:
+//       "Ever heard of NoSQL?We'll help you learn MongoDB and also host your first website",
+//   },
+// ];
 
 export default function CoursePage(props: any) {
   const startPayment = () => {
@@ -78,13 +78,13 @@ export default function CoursePage(props: any) {
       <div className="bg-black">
         <Navbar />
         <Hero {...props} />
-        <div className="flex flex-col items-center">
+        {/* <div className="flex flex-col items-center">
           <h1 className="text-white text-4xl">What you will learn</h1>
           <div className="flex mt-6 justify-center">
             <div className="w-20 h-1 rounded-full bg-indigo-500 inline-flex"></div>
           </div>
-        </div>
-        <section className="text-gray-700 body-font">
+        </div> */}
+        {/* <section className="text-gray-700 body-font">
           <div className="container px-5 py-24 mx-auto flex flex-wrap">
             {syllabusList.map((v, index) => (
               <div
@@ -108,7 +108,7 @@ export default function CoursePage(props: any) {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
         <section className="text-gray-700 body-font">
           <div className="container px-5 py-10 mx-auto">
             <div className="flex flex-wrap -m-4 text-center justify-center">
