@@ -1,4 +1,5 @@
 import React from "react";
+import { getProfile } from "../../lib/authentication";
 
 interface IProps {
   options: Array<string>;
@@ -13,7 +14,7 @@ export default function Navbar(props: IProps) {
   const [userData, setUserData] = React.useState(null);
 
   React.useEffect(() => {
-    setUserData(JSON.parse(localStorage.user));
+    getProfile().then((profile) => setUserData(profile))
   }, []);
 
   return (
@@ -202,7 +203,7 @@ function NotificationDropdown(props: NotificationDropdownProps) {
   if (!props.open) return <></>;
   return (
     <div
-      className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+      className="origin-top-right absolute right-0 mt-2 w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
       ref={dropDownRef}
     >
       <div
