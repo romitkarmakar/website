@@ -28,22 +28,41 @@ import { getProfile } from "../../lib/authentication";
 // ];
 
 export default function CoursePage(props: any) {
+  const [loading, setLoading] = React.useState(false);
+
   const startPayment = () => {
+    console.log(props.Price)
+    setLoading(true);
     getProfile()
-      .then((profile) => {
+      .then(async (profile) => {
+        let rawOrderResponse = await fetch(
+          process.env.NEXT_PUBLIC_API_ENDPOINT + "/createOrder",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              amount: props.Price,
+            }),
+            headers: {
+              Authorization: `Bearer ${localStorage.jwt}`,
+            },
+          }
+        );
+        let orderResponse = await rawOrderResponse.json();
+
         // @ts-ignore
         let rzp1 = new window.Razorpay({
           key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
-          amount: props.Price * 1000,
+          amount: props.Price * 100,
           currency: "INR",
           name: props.Name,
-          description: props.Description,
+          description: props.ShortDescription,
           image: "https://source.unsplash.com/720x500/?coding",
-          order_id: "order_GT3J0Sy4vzP3F0",
+          order_id: orderResponse.id,
           handler: function (response) {
             alert(response.razorpay_payment_id);
             alert(response.razorpay_order_id);
             alert(response.razorpay_signature);
+            setLoading(false);
           },
           prefill: {
             name: profile.username,
@@ -63,6 +82,7 @@ export default function CoursePage(props: any) {
           alert(response.error.reason);
           alert(response.error.metadata.order_id);
           alert(response.error.metadata.payment_id);
+          setLoading(false);
         });
 
         rzp1.open();
@@ -149,11 +169,35 @@ export default function CoursePage(props: any) {
             <div className="flex md:ml-auto md:mr-0 mx-auto items-center flex-shrink-0">
               <button
                 className="bg-indigo-500 inline-flex py-3 px-5 rounded-lg items-center hover:bg-indigo-300 focus:outline-none"
+                disabled={loading}
                 onClick={() => startPayment()}
               >
-                <span className="title-font font-medium text-white">
-                  Enroll Now
-                </span>
+                {!loading ? (
+                  <span className="title-font font-medium text-white">
+                    Enroll Now
+                  </span>
+                ) : (
+                  <svg
+                    className="animate-spin mx-auto h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx={12}
+                      cy={12}
+                      r={10}
+                      stroke="currentColor"
+                      strokeWidth={4}
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                )}
               </button>
               <a
                 href={"https://api.wonderatax.com" + props.SyllabusLink.url}
