@@ -7,7 +7,7 @@ import Testimonials from "../../components/courses/Testimonials";
 import Team from "../../components/courses/Team";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { getProfile } from "../../lib/authentication";
+import Cart from "../../components/Cart";
 
 // const syllabusList = [
 //   {
@@ -28,67 +28,7 @@ import { getProfile } from "../../lib/authentication";
 // ];
 
 export default function CoursePage(props: any) {
-  const [loading, setLoading] = React.useState(false);
-
-  const startPayment = () => {
-    console.log(props.Price)
-    setLoading(true);
-    getProfile()
-      .then(async (profile) => {
-        let rawOrderResponse = await fetch(
-          process.env.NEXT_PUBLIC_API_ENDPOINT + "/createOrder",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              amount: props.Price,
-            }),
-            headers: {
-              Authorization: `Bearer ${localStorage.jwt}`,
-            },
-          }
-        );
-        let orderResponse = await rawOrderResponse.json();
-
-        // @ts-ignore
-        let rzp1 = new window.Razorpay({
-          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
-          amount: props.Price * 100,
-          currency: "INR",
-          name: props.Name,
-          description: props.ShortDescription,
-          image: "https://source.unsplash.com/720x500/?coding",
-          order_id: orderResponse.id,
-          handler: function (response) {
-            alert(response.razorpay_payment_id);
-            alert(response.razorpay_order_id);
-            alert(response.razorpay_signature);
-            setLoading(false);
-          },
-          prefill: {
-            name: profile.username,
-            email: profile.email,
-            contact: profile.PhoneNumber,
-          },
-          theme: {
-            color: "#3399cc",
-          },
-        });
-
-        rzp1.on("payment.failed", function (response) {
-          alert(response.error.code);
-          alert(response.error.description);
-          alert(response.error.source);
-          alert(response.error.step);
-          alert(response.error.reason);
-          alert(response.error.metadata.order_id);
-          alert(response.error.metadata.payment_id);
-          setLoading(false);
-        });
-
-        rzp1.open();
-      })
-      .catch(() => (window.location.href = "/login"));
-  };
+  const [cart, setCart] = React.useState(true);
 
   return (
     <>
@@ -97,7 +37,7 @@ export default function CoursePage(props: any) {
       </Head>
       <div className="bg-black">
         <Navbar />
-        <Hero {...props} />
+        <Hero {...props} setCart={setCart} />
         {/* <div className="flex flex-col items-center">
           <h1 className="text-white text-4xl">What you will learn</h1>
           <div className="flex mt-6 justify-center">
@@ -169,35 +109,11 @@ export default function CoursePage(props: any) {
             <div className="flex md:ml-auto md:mr-0 mx-auto items-center flex-shrink-0">
               <button
                 className="bg-indigo-500 inline-flex py-3 px-5 rounded-lg items-center hover:bg-indigo-300 focus:outline-none"
-                disabled={loading}
-                onClick={() => startPayment()}
+                onClick={() => setCart(true)}
               >
-                {!loading ? (
-                  <span className="title-font font-medium text-white">
-                    Enroll Now
-                  </span>
-                ) : (
-                  <svg
-                    className="animate-spin mx-auto h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx={12}
-                      cy={12}
-                      r={10}
-                      stroke="currentColor"
-                      strokeWidth={4}
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
-                )}
+                <span className="title-font font-medium text-white">
+                  Enroll Now
+                </span>
               </button>
               <a
                 href={"https://api.wonderatax.com" + props.SyllabusLink.url}
@@ -213,6 +129,7 @@ export default function CoursePage(props: any) {
         </section>
         <Copyright />
       </div>
+      <Cart open={cart} setOpen={(d) => setCart(d)} />
     </>
   );
 }
