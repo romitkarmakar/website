@@ -4,11 +4,34 @@ import { getProfile } from "../lib/authentication";
 
 interface IProps {
   open: boolean;
+  course: any;
   setOpen: (value: boolean) => void;
 }
 
 export default function Cart(props: IProps) {
   const [loading, setLoading] = React.useState(false);
+  const [discount, setDiscount] = React.useState(0);
+  const [coupon, setCoupon] = React.useState("");
+
+  const checkCouponCode = async () => {
+    let rawOrderResponse = await fetch(
+      process.env.NEXT_PUBLIC_API_ENDPOINT + "/users?ReferralId=" + coupon,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.jwt}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    let couponResponse = await rawOrderResponse.json();
+
+    if (couponResponse.length > 0) {
+      if (couponResponse[0].CampusAmbassador) {
+        setDiscount((7.5 / 100) * props.course.Price);
+      }
+    }
+  };
 
   const startPayment = () => {
     setLoading(true);
@@ -86,8 +109,8 @@ export default function Cart(props: IProps) {
             className="h-24 rounded-lg"
           />
           <div className="px-4">
-            <h2 className="text-xl font-bold">Full Stack Web Development</h2>
-            <p className="text-gray-500 mt-2">Rs. 10,000</p>
+            <h2 className="text-xl font-bold">{props.course.Name}</h2>
+            <p className="text-gray-500 mt-2">Rs. {props.course.Price}</p>
           </div>
         </div>
         <div className="absolute bottom-0 py-4 flex flex-col w-full pr-4">
@@ -98,28 +121,35 @@ export default function Cart(props: IProps) {
                 className="flex-grow border-none bg-gray-200 rounded-tl-lg rounded-bl-lg"
                 type="text"
                 placeholder="Enter Coupon Code"
+                value={coupon}
+                onChange={(e) => setCoupon(e.target.value)}
               />
-              <button className="bg-blue-500 mr-4 px-4 rounded-tr-lg rounded-br-lg text-white">
+              <button className="bg-blue-500 mr-4 px-4 rounded-tr-lg rounded-br-lg text-white" onClick={() => checkCouponCode()}>
                 Apply
               </button>
             </div>
           </div>
+          {discount > 0 ? <p className="text-sm text-green-400 my-1">Horray!!! A discount of Rs.{discount} has been applied.</p> : null}
           <div className="py-4">
             <h2 className="text-gray-900 text-xl py-2">Order Info</h2>
             <div className="flex items-center justify-between mr-4 py-1 text-gray-500">
               <p>Subtotal</p>
-              <p>Rs. 10,000</p>
+              <p>Rs. {props.course.Price}</p>
             </div>
             <div className="flex items-center justify-between mr-4 py-1 text-gray-500">
               <p>Discount</p>
-              <p>Rs. 1,000</p>
+              <p>Rs. {discount}</p>
             </div>
             <div className="flex items-center justify-between mr-4 py-1">
               <p className="text-gray-500">Total</p>
-              <p className="text-black text-2xl">Rs. 9,000</p>
+              <p className="text-black text-2xl">Rs. {props.course.Price - discount}</p>
             </div>
           </div>
-          <button className="bg-blue-500 rounded-lg py-2 text-xl text-white mr-4" disabled={loading} onClick={startPayment}>
+          <button
+            className="bg-blue-500 rounded-lg py-2 text-xl text-white mr-4"
+            disabled={loading}
+            onClick={startPayment}
+          >
             {!loading ? (
               "Pay Now"
             ) : (

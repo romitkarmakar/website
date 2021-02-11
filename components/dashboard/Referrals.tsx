@@ -28,10 +28,10 @@ export default function Referrals() {
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0">
             <h3 className="text-lg font-medium leading-6 text-gray-900">
-              Your Referral Link
+              Referral Coupon Code
             </h3>
             <p className="mt-1 text-sm text-gray-600">
-              Share to earn money directly in your bank account.
+              Share to earn money directly in your bank account and people get discount on courses using your coupon code.
             </p>
           </div>
         </div>
@@ -46,7 +46,7 @@ export default function Referrals() {
                         <div className="bg-gray-200 py-2 px-4 flex items-center">
                           <span className="text-blue-500">
                             {referralId.length > 0
-                              ? `https://wonderatax.com/register/${referralId}`
+                              ? `${referralId}`
                               : "Loading..."}
                           </span>
                           <div className="flex-grow" />
@@ -88,7 +88,7 @@ export default function Referrals() {
                             stroke="currentColor"
                             onClick={() => {
                               navigator.clipboard.writeText(
-                                `https://wonderatax.com/register/${referralId}`
+                                `${referralId}`
                               );
                             }}
                           >

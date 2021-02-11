@@ -14,7 +14,7 @@ export default function Navbar(props: IProps) {
   const [userData, setUserData] = React.useState(null);
 
   React.useEffect(() => {
-    getProfile().then((profile) => setUserData(profile))
+    getProfile().then((profile) => setUserData(profile));
   }, []);
 
   return (
@@ -61,18 +61,20 @@ export default function Navbar(props: IProps) {
             </button>
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex-shrink-0 flex items-center">
-              <img
-                className="block lg:hidden h-8 w-auto"
-                src="img/bg.webp"
-                alt="Workflow"
-              />
-              <img
-                className="hidden lg:block h-8 w-auto"
-                src="img/bg.webp"
-                alt="Workflow"
-              />
-            </div>
+            <a href="/">
+              <div className="flex-shrink-0 flex items-center">
+                <img
+                  className="block lg:hidden h-8 w-auto"
+                  src="img/bg.webp"
+                  alt="Workflow"
+                />
+                <img
+                  className="hidden lg:block h-8 w-auto"
+                  src="img/bg.webp"
+                  alt="Workflow"
+                />
+              </div>
+            </a>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
                 {props.options.map((v) => (
