@@ -101,7 +101,7 @@ export default function Cart(props: IProps) {
       open={props.open}
       onClose={() => props.setOpen(false)}
     >
-      <div className="max-w-sm md:max-w-md overflow-x-hidden py-4 px-4">
+      <div className="max-w-sm md:max-w-md overflow-x-hidden overflow-y-scroll py-4 px-4">
         <h1 className="text-2xl my-4 mx-4 font-bold">My Cart</h1>
         <div className="flex justify-between px-4 py-4 bg-gray-100 rounded-lg">
           <img
@@ -113,7 +113,7 @@ export default function Cart(props: IProps) {
             <p className="text-gray-500 mt-2">Rs. {props.course.Price}</p>
           </div>
         </div>
-        <div className="absolute bottom-0 py-4 flex flex-col w-full pr-4">
+        <div className="absolute bottom-0 py-4 bg-white flex flex-col w-full pr-4">
           <div>
             <h3 className="mb-2">Coupon Code</h3>
             <div className="flex w-full">

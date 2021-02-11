@@ -63,7 +63,7 @@ export default function CoursePage(props: any) {
             </div>
           </div>
         </section>
-        <Pricing {...props} />
+        <Pricing {...props} setCart={setCart} />
         <Team />
         <Testimonials />
         <section className="text-gray-700 body-font">

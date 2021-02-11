@@ -76,7 +76,7 @@ export default function Pricing(props: any) {
               <Correct />
             </p>
             <div className="p-6 text-center border-t border-gray-300">
-              <button className="flex items-center mt-auto text-white bg-indigo-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-600 rounded">
+              <button className="flex items-center mt-auto text-white bg-indigo-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-600 rounded" onClick={() => props.setCart(true)}>
                 Enroll Now
                 <svg
                   fill="none"
