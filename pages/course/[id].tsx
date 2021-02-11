@@ -8,6 +8,7 @@ import Team from "../../components/courses/Team";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Cart from "../../components/Cart";
+import { useRouter } from "next/dist/client/router";
 
 // const syllabusList = [
 //   {
@@ -29,10 +30,22 @@ import Cart from "../../components/Cart";
 
 export default function CoursePage(props: any) {
   const [cart, setCart] = React.useState(false);
+  const router = useRouter()
 
   return (
     <>
       <Head>
+        <title>{props.Name} | WonderataX Course</title>
+        <meta name="description" content={props.ShortDescription}></meta>
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={props.Name} />
+        <meta property="og:description" content={props.Description} />
+        <meta
+          property="og:image"
+          content="https://source.unsplash.com/720x500/?coding"
+        />
+        <meta property="og:url" content={"https://wonderatax.com" + router.asPath} />
+        <meta property="og:site_name" content="WonderataX" />
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       </Head>
       <div className="bg-black">
