@@ -2,15 +2,15 @@ import React from "react";
 
 const testimonialList = [
   {
-    name: "Rahul Talukdar",
+    name: "Saswata Talukdar",
     role: "Senior Product Designer",
-    testimonial: `Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki
-  taxidermy 90's cronut +1 kinfolk. Single-origin coffee ennui shaman
-  taiyaki vape DIY tote bag drinking vinegar cronut adaptogen squid
-  fanny pack vaporware. Man bun next level coloring book skateboard
-  four loko knausgaarcarb next level
-  shoindigoitch ethical authentic, yr scenester sriracha forage
-  franzen organic drinking vinegar.`,
+    testimonial: `Overall 5 stars, I think the subject material was perfect, it covered all the main DE concepts. 
+    A few small critiques: -The first lessons data modeling was a bit dry. The info was great, but delivered in a slightly 
+    boring manner. - In Cloud Data Warehouses, the order of some of the lessons don't make sense and it doesn't flow well. There 
+    are a decent amount of comments in 'knowledge' with this complaint and it really should be fixed. It mars what is o
+    therwise a terrific lessons. - The help from the tutors is limited. They have a lot of questions they are expected to g
+    et through and must respond in a timely manner, so I don't fault them at all. I think if the question is very project specific, 
+    they are a good resource, but if it's more of a general knowledge question, I would go with stackoverflow.`,
   },
   {
     name: "Maitrish Ghosh",
@@ -69,12 +69,11 @@ export default function Testimonials() {
       <div className="flex justify-center">
         {testimonialList.map((_, index) => (
           <div
-          key={index}
-          onClick={() => setCurrentIndex(index)}
+            key={index}
+            onClick={() => setCurrentIndex(index)}
             className={
-              (currentIndex == index
-                ? "bg-indigo-500"
-                : "bg-gray-500") + " rounded-full w-4 h-4 mx-2 cursor-pointer"
+              (currentIndex == index ? "bg-indigo-500" : "bg-gray-500") +
+              " rounded-full w-4 h-4 mx-2 cursor-pointer"
             }
           />
         ))}

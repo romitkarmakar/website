@@ -1,4 +1,5 @@
 import { Drawer } from "@material-ui/core";
+import { useRouter } from "next/dist/client/router";
 import React from "react";
 import { getProfile } from "../lib/authentication";
 
@@ -12,8 +13,18 @@ export default function Cart(props: IProps) {
   const [loading, setLoading] = React.useState(false);
   const [discount, setDiscount] = React.useState(0);
   const [coupon, setCoupon] = React.useState("");
+  const [couponloading, setCouponloading] = React.useState(false);
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (router.query.refer) {
+      setCoupon(router.query.refer as string);
+      checkCouponCode()
+    }
+  }, []);
 
   const checkCouponCode = async () => {
+    setCouponloading(true);
     let rawOrderResponse = await fetch(
       process.env.NEXT_PUBLIC_API_ENDPOINT + "/users?ReferralId=" + coupon,
       {
@@ -28,9 +39,15 @@ export default function Cart(props: IProps) {
 
     if (couponResponse.length > 0) {
       if (couponResponse[0].CampusAmbassador) {
-        setDiscount((7.5 / 100) * props.course.Price);
+        fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/config")
+          .then((res) => res.json())
+          .then((response) => {
+            setDiscount((response.CADiscount / 100) * props.course.Price);
+          });
       }
     }
+
+    setCouponloading(false);
   };
 
   const startPayment = () => {
@@ -124,12 +141,43 @@ export default function Cart(props: IProps) {
                 value={coupon}
                 onChange={(e) => setCoupon(e.target.value)}
               />
-              <button className="bg-blue-500 mr-4 px-4 rounded-tr-lg rounded-br-lg text-white" onClick={() => checkCouponCode()}>
-                Apply
+              <button
+                className="bg-blue-500 mr-4 px-4 rounded-tr-lg rounded-br-lg text-white"
+                onClick={() => checkCouponCode()}
+                disabled={couponloading}
+              >
+                {!couponloading ? (
+                  <>Apply</>
+                ) : (
+                  <svg
+                    className="animate-spin mx-auto h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx={12}
+                      cy={12}
+                      r={10}
+                      stroke="currentColor"
+                      strokeWidth={4}
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                )}
               </button>
             </div>
           </div>
-          {discount > 0 ? <p className="text-sm text-green-400 my-1">Horray!!! A discount of Rs.{discount} has been applied.</p> : null}
+          {discount > 0 ? (
+            <p className="text-sm text-green-400 my-1">
+              Horray!!! A discount of Rs.{discount} has been applied.
+            </p>
+          ) : null}
           <div className="py-4">
             <h2 className="text-gray-900 text-xl py-2">Order Info</h2>
             <div className="flex items-center justify-between mr-4 py-1 text-gray-500">
@@ -142,7 +190,9 @@ export default function Cart(props: IProps) {
             </div>
             <div className="flex items-center justify-between mr-4 py-1">
               <p className="text-gray-500">Total</p>
-              <p className="text-black text-2xl">Rs. {props.course.Price - discount}</p>
+              <p className="text-black text-2xl">
+                Rs. {props.course.Price - discount}
+              </p>
             </div>
           </div>
           <button
