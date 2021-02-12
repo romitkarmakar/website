@@ -61,7 +61,7 @@ export default function Cart(props: IProps) {
             body: JSON.stringify({
               Status: "NOT_PAID",
               users_permissions_user: profile.id,
-              courses: [""],
+              courses: [props.course.id],
             }),
             headers: {
               Authorization: `Bearer ${localStorage.jwt}`,
@@ -81,10 +81,10 @@ export default function Cart(props: IProps) {
           image: "https://source.unsplash.com/720x500/?coding",
           order_id: orderResponse.RazorpayOrderId,
           handler: function (response) {
-            alert(response.razorpay_payment_id);
-            alert(response.razorpay_order_id);
-            alert(response.razorpay_signature);
+            console.log(response);
+            alert("Payment successfull")
             setLoading(false);
+            window.location.href = "/dashboard"
           },
           prefill: {
             name: profile.username,
