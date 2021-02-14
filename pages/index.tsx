@@ -171,7 +171,7 @@ export default function IndexPage() {
       </div>
       <div className="container">
         <div className="padding">
-          <section id="about" className="about">
+          <section id="about" className="about pt-72">
             <div className="section-title">
               <h2>ABOUT US</h2>
             </div>
