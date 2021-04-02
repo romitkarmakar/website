@@ -6,7 +6,7 @@ import Courses from "../components/dashboard/Courses";
 import Referrals from "../components/dashboard/Referrals";
 import Billing from "../components/dashboard/Billing";
 
-const optionsList = ["Courses", "Profile", "Referrals", "Billing"];
+const optionsList = ["Courses", "Referrals", "Billing"];
 
 export default function Dashboard() {
   const [selectedOption, setSelectedOption] = React.useState(optionsList[0]);

@@ -9,18 +9,25 @@ export default function Hero(props: any) {
           <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
             Become a {props.Name}
           </h1>
-          <p className="mb-2 leading-relaxed text-white">
-            {props.Description}
-          </p>
+          <p className="mb-2 leading-relaxed text-white">{props.Description}</p>
           <p className="mb-4 leading-relaxed text-white">
             Time remaining for enrollment:
           </p>
           <Timer {...props} />
           <div className="flex justify-center">
-            <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-              Enroll Now
+            <button
+              className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              onClick={() => props.setCart(true)}
+            >
+              <span className="title-font font-medium text-white">
+                Enroll Now
+              </span>
             </button>
-            <a href={"https://api.wonderatax.com" + props.SyllabusLink.url} target="_blank" className="ml-4 inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
+            <a
+              href={"https://api.wonderatax.com" + props.SyllabusLink.url}
+              target="_blank"
+              className="ml-4 inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg"
+            >
               Download Syllabus
             </a>
           </div>

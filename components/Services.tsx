@@ -143,7 +143,7 @@ const servicesList = [
 
 export default function Services() {
   return (
-    <section className="text-gray-700 body-font">
+    <section className="text-gray-700 body-font" id="services">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">
@@ -153,7 +153,7 @@ export default function Services() {
             Know about the range of services provided by the wonderatax team.
           </p>
         </div>
-        <div className="flex flex-wrap -m-4">
+        <div className="flex flex-wrap justify-center items-center -m-4">
           {servicesList.map((v) => (
             <div className="xl:w-1/3 md:w-1/2 p-4" key={v.title}>
               <div className="border border-gray-300 p-6 rounded-lg">
@@ -163,7 +163,7 @@ export default function Services() {
                 <h2 className="text-lg text-white font-medium title-font mb-2">
                   {v.title}
                 </h2>
-                <p className="leading-relaxed text-base">{v.description}</p>
+                <p className="leading-relaxed text-gray-400">{v.description}</p>
               </div>
             </div>
           ))}

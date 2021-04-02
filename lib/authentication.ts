@@ -1,3 +1,5 @@
+import { getItem, setItem } from "./storage";
+
 export function parseJwt(token) {
   var base64Url = token.split(".")[1];
   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -14,18 +16,23 @@ export function parseJwt(token) {
 }
 
 export async function getProfile() {
-  let res = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/users/me", {
-    headers: {
-      Authorization: `Bearer ${localStorage.jwt}`,
-    },
-  });
-  if (res.status == 200) {
-    let response = await res.json();
-
-    return response;
-  } else if (res.status == 400) {
-    throw new Error("Not authorized");
+  let localData = getItem("user");
+  if (!localData) {
+    let res = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/users/me", {
+      headers: {
+        Authorization: `Bearer ${localStorage.jwt}`,
+      },
+    });
+    if (res.status == 200) {
+      let response = await res.json();
+      setItem("user", response, Date.now() + 1000 * 60);
+      return response;
+    } else if (res.status == 400) {
+      throw new Error("Not authorized");
+    } else {
+      throw new Error("Internal Server Error");
+    }
   } else {
-    throw new Error("Internal Server Error");
+    return localData;
   }
 }

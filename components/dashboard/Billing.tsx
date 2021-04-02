@@ -11,6 +11,7 @@ export default function Billing() {
     let userData = JSON.parse(localStorage.user);
     let temp = [];
 
+    if (!userData.payments) return;
     for (let i = 0; i < userData.payments.length; i++) {
       for (let j = 0; j < userData.payments[i].courses.length; j++) {
         let res = await fetch(
@@ -84,7 +85,11 @@ export default function Billing() {
                                   <div className="flex-shrink-0 h-10 w-10">
                                     <img
                                       className="h-10 w-10 rounded-full"
-                                      src={("https://api.wonderatax.com" + v.course.Icon.url) || "https://cdn.iconscout.com/icon/free/png-512/php-27-226042.png"}
+                                      src={
+                                        "https://api.wonderatax.com" +
+                                          v.course.Icon.url ||
+                                        "https://cdn.iconscout.com/icon/free/png-512/php-27-226042.png"
+                                      }
                                     />
                                   </div>
                                   <div className="ml-4">

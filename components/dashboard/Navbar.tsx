@@ -1,4 +1,5 @@
 import React from "react";
+import { getProfile } from "../../lib/authentication";
 
 interface IProps {
   options: Array<string>;
@@ -13,7 +14,7 @@ export default function Navbar(props: IProps) {
   const [userData, setUserData] = React.useState(null);
 
   React.useEffect(() => {
-    setUserData(JSON.parse(localStorage.user));
+    getProfile().then((profile) => setUserData(profile));
   }, []);
 
   return (
@@ -60,18 +61,20 @@ export default function Navbar(props: IProps) {
             </button>
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex-shrink-0 flex items-center">
-              <img
-                className="block lg:hidden h-8 w-auto"
-                src="img/bg.webp"
-                alt="Workflow"
-              />
-              <img
-                className="hidden lg:block h-8 w-auto"
-                src="img/bg.webp"
-                alt="Workflow"
-              />
-            </div>
+            <a href="/">
+              <div className="flex-shrink-0 flex items-center">
+                <img
+                  className="block lg:hidden h-8 w-auto"
+                  src="img/bg.webp"
+                  alt="Workflow"
+                />
+                <img
+                  className="hidden lg:block h-8 w-auto"
+                  src="img/bg.webp"
+                  alt="Workflow"
+                />
+              </div>
+            </a>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
                 {props.options.map((v) => (
@@ -177,9 +180,13 @@ interface NotificationDropdownProps {
 
 function NotificationDropdown(props: NotificationDropdownProps) {
   const dropDownRef = React.useRef(null);
+  const [notifications, setNotifications] = React.useState([]);
+
   React.useEffect(() => {
-    if (props.open) document.addEventListener("mousedown", handleClick, false);
-    else document.removeEventListener("mousedown", handleClick, false);
+    if (props.open) {
+      document.addEventListener("mousedown", handleClick, false);
+      loadNotifications();
+    } else document.removeEventListener("mousedown", handleClick, false);
   }, [props.open]);
 
   const handleClick = (e) => {
@@ -189,10 +196,16 @@ function NotificationDropdown(props: NotificationDropdownProps) {
     }
   };
 
+  const loadNotifications = () => {
+    fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + "/notifications")
+      .then((res) => res.json())
+      .then((response) => setNotifications(response));
+  };
+
   if (!props.open) return <></>;
   return (
     <div
-      className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+      className="origin-top-right absolute right-0 mt-2 w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
       ref={dropDownRef}
     >
       <div
@@ -201,13 +214,36 @@ function NotificationDropdown(props: NotificationDropdownProps) {
         aria-orientation="vertical"
         aria-labelledby="options-menu"
       >
-        <a
-          href="#"
-          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-          role="menuitem"
-        >
-          You have no new notifications
-        </a>
+        {notifications.length == 0 ? (
+          <a
+            href="#"
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            role="menuitem"
+          >
+            You have no new notifications
+          </a>
+        ) : (
+          notifications.map((v) => (
+            <a
+              href="#"
+              className="block px-4 py-2 text-gray-700"
+              role="menuitem"
+            >
+              <p className="text-md text-gray-900">{v.Title}</p>
+              <p className="text-xs text-gray-500">
+                {v.Description.slice(0, 50)}
+                {v.Description.length > 50 ? (
+                  <>
+                    ...
+                    <a href="" className="text-blue-500">
+                      Read More
+                    </a>
+                  </>
+                ) : null}
+              </p>
+            </a>
+          ))
+        )}
       </div>
     </div>
   );

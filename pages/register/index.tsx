@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import AlertBox from "../components/AlertBox";
+import AlertBox from "../../components/AlertBox";
 
 export default function RegisterPage() {
   const [formData, setFormData] = React.useState({
@@ -8,6 +8,7 @@ export default function RegisterPage() {
     password: "",
     username: "",
     PhoneNumber: "",
+    Referrer: "",
   });
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
@@ -31,7 +32,7 @@ export default function RegisterPage() {
           setError((await res.json()).message[0].messages[0].message);
           setLoading(false);
         } else {
-          setError(await res.text());
+          // setError(await res.text());
           setLoading(false);
         }
       })
@@ -107,6 +108,23 @@ export default function RegisterPage() {
                           setFormData({
                             ...formData,
                             PhoneNumber: e.target.value,
+                          })
+                        }
+                        className="text-md block px-3 py-2 rounded-lg w-full
+          bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                      />
+                    </div>
+                    <div className="py-1">
+                      <span className="px-1 text-sm text-gray-600">
+                        Referrer
+                      </span>
+                      <input
+                        type="text"
+                        value={formData.Referrer}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            Referrer: e.target.value,
                           })
                         }
                         className="text-md block px-3 py-2 rounded-lg w-full

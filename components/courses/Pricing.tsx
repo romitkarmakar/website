@@ -76,7 +76,7 @@ export default function Pricing(props: any) {
               <Correct />
             </p>
             <div className="p-6 text-center border-t border-gray-300">
-              <button className="flex items-center mt-auto text-white bg-indigo-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-600 rounded">
+              <button className="flex items-center mt-auto text-white bg-indigo-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-600 rounded" onClick={() => props.setCart(true)}>
                 Enroll Now
                 <svg
                   fill="none"
@@ -91,9 +91,9 @@ export default function Pricing(props: any) {
                 </svg>
               </button>
               <p className="text-xs text-gray-500 mt-3">
-                Literally you probably haven't heard of them jean shorts.
+                Literally you will never regret it.
               </p>
-            </div> */}
+            </div>
           </div>
         
         </div>
